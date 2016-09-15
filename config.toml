@@ -1,4 +1,4 @@
-baseurl = "https://daniilidis-group.github.io/penncosyvio"
+baseurl = "https://daniilidis-group.github.io/penncosyvio/"
 languageCode = "en-us"
 title = "PennCOSYVIO Data Set"
 theme = "hugo-material-docs"
@@ -41,7 +41,7 @@ canonifyurls = true
 
 [[menu.main]]
 	name   = "Overview"
-	url    = "/"
+	url    = "g/"
 	weight = 0
 
 [[menu.main]]
