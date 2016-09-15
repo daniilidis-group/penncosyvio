@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PennCOSYVIO Data Set</title>
+    <link>https://daniilidis-group.github.io/penncosyvio/</link>
+    <description>Recent content on PennCOSYVIO Data Set</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Mar 2016 21:07:13 +0100</lastBuildDate>
+    <atom:link href="https://daniilidis-group.github.io/penncosyvio/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The PennCOSYVIO Data Set</title>
+      <link>https://daniilidis-group.github.io/penncosyvio/</link>
+      <pubDate>Tue, 08 Mar 2016 21:07:13 +0100</pubDate>
+      
+      <guid>https://daniilidis-group.github.io/penncosyvio/</guid>
+      <description>
+
+&lt;h2 id=&#34;purpose&#34;&gt;Purpose&lt;/h2&gt;
+
+&lt;p&gt;The PennCOSY VIO data set is collection of synchronized video and IMU data recorded at the University of Pennsylvania&amp;rsquo;s Singh Center in April 2016. It is geared towards benchmarking of Visual Inertial Odometry algorithms on hand-held devices, but can also be used for other platforms such as micro aerial vehicles or ground robots.&lt;/p&gt;
+
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+
+&lt;p&gt;What sets this benchmark apart from previous ones is that it goes from outdoors to indoors:
+&lt;img src=&#34;pics/singh_outdoors_gopro.jpg&#34; alt=&#34;Singh Center from the outside&#34; /&gt;
+&lt;img src=&#34;pics/singh_indoors_tango_rgb.jpg&#34; alt=&#34;inside the Singh Center&#34; /&gt;
+and provides a fairly accurate ground truth (approx 10cm) for the camera rig:
+&lt;img src=&#34;pics/sequence_as.jpg&#34; alt=&#34;sequence AS trajectory&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Download</title>
+      <link>https://daniilidis-group.github.io/penncosyvio/download/</link>
+      <pubDate>Wed, 09 Mar 2016 00:11:02 +0100</pubDate>
+      
+      <guid>https://daniilidis-group.github.io/penncosyvio/download/</guid>
+      <description>
+
+&lt;h2 id=&#34;download&#34;&gt;Download&lt;/h2&gt;
+
+&lt;p&gt;We are still working on this part &amp;hellip;. need to locate a large enough disk for hosting. Should happen any day.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
