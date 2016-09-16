@@ -41,7 +41,7 @@ canonifyurls = true
 
 [[menu.main]]
 	name   = "Overview"
-	url    = "g/"
+	url    = ""
 	weight = 0
 
 [[menu.main]]
