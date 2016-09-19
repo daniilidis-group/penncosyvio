@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Intrinsic_calibs on PennCOSYVIO Data Set</title>
+    <link>https://daniilidis-group.github.io/penncosyvio/intrinsic_calib/</link>
+    <description>Recent content in Intrinsic_calibs on PennCOSYVIO Data Set</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 Mar 2016 00:11:02 +0100</lastBuildDate>
+    <atom:link href="https://daniilidis-group.github.io/penncosyvio/intrinsic_calib/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Intrinsic Calibration</title>
+      <link>https://daniilidis-group.github.io/penncosyvio/intrinsic_calib/</link>
+      <pubDate>Wed, 09 Mar 2016 00:11:02 +0100</pubDate>
+      
+      <guid>https://daniilidis-group.github.io/penncosyvio/intrinsic_calib/</guid>
+      <description>
+
+&lt;h2 id=&#34;intrinsic-calibration&#34;&gt;Intrinsic Calibration&lt;/h2&gt;
+
+&lt;p&gt;Not online yet&amp;hellip;..&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

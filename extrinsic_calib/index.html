@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Download - PennCOSYVIO Data Set</title>
+    <title>Extrinsic Calibration - PennCOSYVIO Data Set</title>
     <meta name="generator" content="Hugo 0.16-DEV" />
 
     
     <meta name="description" content="A data set for Visual Inertial Odometry.">
     
-    <link rel="canonical" href="https://daniilidis-group.github.io/penncosyvio/download/">
+    <link rel="canonical" href="https://daniilidis-group.github.io/penncosyvio/extrinsic_calib/">
     
     <meta name="author" content="Bernd Pfrommer">
     
 
-    <meta property="og:url" content="https://daniilidis-group.github.io/penncosyvio/download/">
+    <meta property="og:url" content="https://daniilidis-group.github.io/penncosyvio/extrinsic_calib/">
     <meta property="og:title" content="PennCOSYVIO Data Set">
     <meta property="og:image" content="https://daniilidis-group.github.io/penncosyvio/upenn_favicon.jpg">
     <meta name="apple-mobile-web-app-title" content="PennCOSYVIO Data Set">
@@ -101,7 +101,7 @@
     <div class="headtitle">
     <div class="stretch">
       <div class="title">
-        Download
+        Extrinsic Calibration
       </div>
     </div>
     </div>
@@ -185,14 +185,11 @@
 
 
 
-<a class="current" title="Download" href="https://daniilidis-group.github.io/penncosyvio/download/">
+<a  title="Download" href="https://daniilidis-group.github.io/penncosyvio/download/">
 	
 	Download
 </a>
 
-
-<ul id="scrollspy">
-</ul>
 
   
 </li>
@@ -222,11 +219,14 @@
 
 
 
-<a  title="Extrinsic Calibration" href="https://daniilidis-group.github.io/penncosyvio/extrinsic_calib/">
+<a class="current" title="Extrinsic Calibration" href="https://daniilidis-group.github.io/penncosyvio/extrinsic_calib/">
 	
 	Extrinsic Calibration
 </a>
 
+
+<ul id="scrollspy">
+</ul>
 
   
 </li>
@@ -260,13 +260,21 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Download </h1>
+			<h1>Extrinsic Calibration </h1>
 
 			
 
-<h2 id="download">Download</h2>
+<h2 id="extrinsic-calibration">Extrinsic Calibration</h2>
 
-<p>We are still working on this part &hellip;. need to locate a large enough disk for hosting. Should happen any day.</p>
+<p><p>All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed. For example, \(^{\mathrm{C1}}\mathbf{X}\) are the coordinates of vector <B>X</B> in the reference frame of camera C1. The transform <SUP>S2</SUP> <B>T</B><SUB>S1</SUB> takes a vector expressed in coordinate system S1 and transforms it to system S2: <SUP>S2</SUP><B>X</B> = <SUP>S2</SUP><B>T</B><SUB>S1</SUB> <SUP>S1</SUP><B>X</B>. For example, given coordinates in the rig reference frame, the ones in sensor system S1 can be obtained via:
+\[
+^{\mathrm{S1}}\mathbf{X} = ^{\mathrm{S1}}\mathbf{T}_{\mathrm{B}}\  ^{\mathrm{B}}\mathbf{X}
+\]
+</p>
+<p><SUP>S1</SUP><B>X</B> = <SUP>S1</SUP><B>T</B><SUB>B</SUB> <SUP>B</SUP><B>X</B></p>
+<p>The transform T can be expressed as a 3x4 transformation matrix:</p>
+<p><B>T</B> = [<B>R</B>, <B>t</B>]</p>
+<p>where <B>t</B> is a 3x1 translation vector, and <B>R</B> is a pure rotation.</p>
 
 
 			<footer class="footer">
@@ -275,7 +283,7 @@
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://daniilidis-group.github.io/penncosyvio/" title="The PennCOSYVIO Data Set">
+      <a href="https://daniilidis-group.github.io/penncosyvio/intrinsic_calib/" title="Intrinsic Calibration">
         <span class="direction">
           Previous
         </span>
@@ -285,7 +293,7 @@
           </div>
           <div class="stretch">
             <div class="title">
-              The PennCOSYVIO Data Set
+              Intrinsic Calibration
             </div>
           </div>
         </div>
@@ -294,22 +302,6 @@
   </div>
 
   <div class="next">
-  
-      <a href="https://daniilidis-group.github.io/penncosyvio/intrinsic_calib/" title="Intrinsic Calibration">
-        <span class="direction">
-          Next
-        </span>
-        <div class="page">
-          <div class="stretch">
-            <div class="title">
-              Intrinsic Calibration
-            </div>
-          </div>
-          <div class="button button-next" role="button" aria-label="Next">
-            <i class="icon icon-forward"></i>
-          </div>
-        </div>
-      </a>
   
   </div>
 </nav>

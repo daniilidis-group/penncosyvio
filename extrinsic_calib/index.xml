@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Extrinsic_calibs on PennCOSYVIO Data Set</title>
+    <link>https://daniilidis-group.github.io/penncosyvio/extrinsic_calib/</link>
+    <description>Recent content in Extrinsic_calibs on PennCOSYVIO Data Set</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 Mar 2016 00:11:02 +0100</lastBuildDate>
+    <atom:link href="https://daniilidis-group.github.io/penncosyvio/extrinsic_calib/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Extrinsic Calibration</title>
+      <link>https://daniilidis-group.github.io/penncosyvio/extrinsic_calib/</link>
+      <pubDate>Wed, 09 Mar 2016 00:11:02 +0100</pubDate>
+      
+      <guid>https://daniilidis-group.github.io/penncosyvio/extrinsic_calib/</guid>
+      <description>
+
+&lt;h2 id=&#34;extrinsic-calibration&#34;&gt;Extrinsic Calibration&lt;/h2&gt;
+
+&lt;p&gt;&lt;p&gt;All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed. For example, \(^{\mathrm{C1}}\mathbf{X}\) are the coordinates of vector &lt;B&gt;X&lt;/B&gt; in the reference frame of camera C1. The transform &lt;SUP&gt;S2&lt;/SUP&gt; &lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;S1&lt;/SUB&gt; takes a vector expressed in coordinate system S1 and transforms it to system S2: &lt;SUP&gt;S2&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; = &lt;SUP&gt;S2&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;S1&lt;/SUB&gt; &lt;SUP&gt;S1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt;. For example, given coordinates in the rig reference frame, the ones in sensor system S1 can be obtained via:
+\[
+^{\mathrm{S1}}\mathbf{X} = ^{\mathrm{S1}}\mathbf{T}_{\mathrm{B}}\  ^{\mathrm{B}}\mathbf{X}
+\]
+&lt;/p&gt;
+&lt;p&gt;&lt;SUP&gt;S1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; = &lt;SUP&gt;S1&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt; &lt;SUP&gt;B&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt;&lt;/p&gt;
+&lt;p&gt;The transform T can be expressed as a 3x4 transformation matrix:&lt;/p&gt;
+&lt;p&gt;&lt;B&gt;T&lt;/B&gt; = [&lt;B&gt;R&lt;/B&gt;, &lt;B&gt;t&lt;/B&gt;]&lt;/p&gt;
+&lt;p&gt;where &lt;B&gt;t&lt;/B&gt; is a 3x1 translation vector, and &lt;B&gt;R&lt;/B&gt; is a pure rotation.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
