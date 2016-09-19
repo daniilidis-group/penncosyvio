@@ -69,15 +69,49 @@ and provides a fairly accurate ground truth (approx 10cm) for the camera rig:
 
 &lt;h2 id=&#34;extrinsic-calibration&#34;&gt;Extrinsic Calibration&lt;/h2&gt;
 
-&lt;p&gt;&lt;p&gt;All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed. For example, \(^{\mathrm{C1}}\mathbf{X}\) are the coordinates of vector &lt;B&gt;X&lt;/B&gt; in the reference frame of camera C1. The transform &lt;SUP&gt;S2&lt;/SUP&gt; &lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;S1&lt;/SUB&gt; takes a vector expressed in coordinate system S1 and transforms it to system S2: &lt;SUP&gt;S2&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; = &lt;SUP&gt;S2&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;S1&lt;/SUB&gt; &lt;SUP&gt;S1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt;. For example, given coordinates in the rig reference frame, the ones in sensor system S1 can be obtained via:
-\[
-^{\mathrm{S1}}\mathbf{X} = ^{\mathrm{S1}}\mathbf{T}_{\mathrm{B}}\  ^{\mathrm{B}}\mathbf{X}
-\]
-&lt;/p&gt;
-&lt;p&gt;&lt;SUP&gt;S1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; = &lt;SUP&gt;S1&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt; &lt;SUP&gt;B&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt;&lt;/p&gt;
+&lt;p&gt;&lt;p&gt;All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform &lt;B&gt;T&lt;/B&gt; from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed, i.e. &lt;SUP&gt;C1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; are the coordinates of vector &lt;B&gt;X&lt;/B&gt; in the reference frame of camera C1. The transform &lt;SUP&gt;S2&lt;/SUP&gt; &lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;S1&lt;/SUB&gt; takes a vector expressed in coordinate system S1 and transforms it to system S2: &lt;SUP&gt;S2&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; = &lt;SUP&gt;S2&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;S1&lt;/SUB&gt; &lt;SUP&gt;S1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt;. For example, given coordinates in the rig reference frame (B), the ones in camera C1 can be obtained via:
+&lt;p&gt;&lt;SUP&gt;C1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; = &lt;SUP&gt;C1&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt; &lt;SUP&gt;B&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt;&lt;/p&gt;
 &lt;p&gt;The transform T can be expressed as a 3x4 transformation matrix:&lt;/p&gt;
 &lt;p&gt;&lt;B&gt;T&lt;/B&gt; = [&lt;B&gt;R&lt;/B&gt;, &lt;B&gt;t&lt;/B&gt;]&lt;/p&gt;
 &lt;p&gt;where &lt;B&gt;t&lt;/B&gt; is a 3x1 translation vector, and &lt;B&gt;R&lt;/B&gt; is a pure rotation.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;Sensor&lt;/td&gt;&lt;td&gt;Transform&lt;/td&gt;&lt;td colspan=&#34;4&#34; class=&#34;tdcenter&#34;&gt;&lt;B&gt;T&lt;/B&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;GoPro C1&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;C1&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.2961304418&lt;/td&gt;&lt;td&gt;    0.0011052645&lt;/td&gt;&lt;td&gt;    0.9551468682&lt;/td&gt;&lt;td&gt;  0.082674&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0191451276&lt;/td&gt;&lt;td&gt;    0.9997915577&lt;/td&gt;&lt;td&gt;   -0.0070926152&lt;/td&gt;&lt;td&gt;  0.002503&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;   -0.9549556144&lt;/td&gt;&lt;td&gt;    0.0203867479&lt;/td&gt;&lt;td&gt;    0.2960475553&lt;/td&gt;&lt;td&gt; -0.127252&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;GoPro C2&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;C2&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    1.0000000000&lt;/td&gt;&lt;td&gt;    0.0000000000&lt;/td&gt;&lt;td&gt;    0.0000000000&lt;/td&gt;&lt;td&gt;  0.000000&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0000000000&lt;/td&gt;&lt;td&gt;    1.0000000000&lt;/td&gt;&lt;td&gt;    0.0000000000&lt;/td&gt;&lt;td&gt;  0.000000&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0000000000&lt;/td&gt;&lt;td&gt;    0.0000000000&lt;/td&gt;&lt;td&gt;    1.0000000000&lt;/td&gt;&lt;td&gt;  0.000000&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;GoPro C3&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;C3&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.2251883426&lt;/td&gt;&lt;td&gt;   -0.0049445900&lt;/td&gt;&lt;td&gt;   -0.9743027052&lt;/td&gt;&lt;td&gt; -0.039557&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0047482257&lt;/td&gt;&lt;td&gt;    0.9999808169&lt;/td&gt;&lt;td&gt;   -0.0039774600&lt;/td&gt;&lt;td&gt; -0.000781&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.9743036820&lt;/td&gt;&lt;td&gt;   -0.0037305315&lt;/td&gt;&lt;td&gt;    0.2252075009&lt;/td&gt;&lt;td&gt; -0.157049&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;Tango Bottom RGB&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;TBR&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.9986085337&lt;/td&gt;&lt;td&gt;    0.0027720771&lt;/td&gt;&lt;td&gt;   -0.0526622452&lt;/td&gt;&lt;td&gt; -0.068398&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;   -0.0079486091&lt;/td&gt;&lt;td&gt;    0.9951207697&lt;/td&gt;&lt;td&gt;   -0.0983436495&lt;/td&gt;&lt;td&gt;  0.084056&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0521326778&lt;/td&gt;&lt;td&gt;    0.0986253992&lt;/td&gt;&lt;td&gt;    0.9937581268&lt;/td&gt;&lt;td&gt;  0.044039&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;Tango Top Fisheye&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;TTF&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.9995000221&lt;/td&gt;&lt;td&gt;    0.0130284988&lt;/td&gt;&lt;td&gt;   -0.0288090975&lt;/td&gt;&lt;td&gt; -0.014741&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;   -0.0128514581&lt;/td&gt;&lt;td&gt;    0.9998974312&lt;/td&gt;&lt;td&gt;    0.0063219540&lt;/td&gt;&lt;td&gt;  0.208203&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0288885081&lt;/td&gt;&lt;td&gt;   -0.0059485542&lt;/td&gt;&lt;td&gt;    0.9995649398&lt;/td&gt;&lt;td&gt; -0.001742&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;VI Sensor Left&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;VL&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.9991687124&lt;/td&gt;&lt;td&gt;   -0.0059124048&lt;/td&gt;&lt;td&gt;   -0.0403351908&lt;/td&gt;&lt;td&gt;  0.042704&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0050322682&lt;/td&gt;&lt;td&gt;    0.9997477793&lt;/td&gt;&lt;td&gt;   -0.0218873038&lt;/td&gt;&lt;td&gt; -0.116821&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0404544240&lt;/td&gt;&lt;td&gt;    0.0216661317&lt;/td&gt;&lt;td&gt;    0.9989464542&lt;/td&gt;&lt;td&gt; -0.019905&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;VI Sensor Right&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;VR&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.9990911633&lt;/td&gt;&lt;td&gt;   -0.0072415591&lt;/td&gt;&lt;td&gt;   -0.0420048470&lt;/td&gt;&lt;td&gt; -0.067457&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0063429185&lt;/td&gt;&lt;td&gt;    0.9997489915&lt;/td&gt;&lt;td&gt;   -0.0214877011&lt;/td&gt;&lt;td&gt; -0.116480&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0421499079&lt;/td&gt;&lt;td&gt;    0.0212017389&lt;/td&gt;&lt;td&gt;    0.9988863156&lt;/td&gt;&lt;td&gt; -0.020079&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;Tango Bottom IMU&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;TBI&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.9986085337&lt;/td&gt;&lt;td&gt;    0.0027720770&lt;/td&gt;&lt;td&gt;   -0.0526622452&lt;/td&gt;&lt;td&gt; -0.006998&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0192066304&lt;/td&gt;&lt;td&gt;   -0.9491479460&lt;/td&gt;&lt;td&gt;    0.3142439848&lt;/td&gt;&lt;td&gt; -0.074008&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;   -0.0491131534&lt;/td&gt;&lt;td&gt;   -0.3148181892&lt;/td&gt;&lt;td&gt;   -0.9478804808&lt;/td&gt;&lt;td&gt; -0.058834&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;Tango Top IMU&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;TTI&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.9995000221&lt;/td&gt;&lt;td&gt;    0.0130284988&lt;/td&gt;&lt;td&gt;   -0.0288090975&lt;/td&gt;&lt;td&gt; -0.003344&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0200390427&lt;/td&gt;&lt;td&gt;   -0.9658149773&lt;/td&gt;&lt;td&gt;    0.2584567012&lt;/td&gt;&lt;td&gt; -0.203341&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;   -0.0244569550&lt;/td&gt;&lt;td&gt;   -0.2589047853&lt;/td&gt;&lt;td&gt;   -0.9655931698&lt;/td&gt;&lt;td&gt; -0.049792&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;VI Sensor IMU&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;VI&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.9989551739&lt;/td&gt;&lt;td&gt;   -0.0016800380&lt;/td&gt;&lt;td&gt;   -0.0456698809&lt;/td&gt;&lt;td&gt; -0.031005&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0005817624&lt;/td&gt;&lt;td&gt;    0.9997105684&lt;/td&gt;&lt;td&gt;   -0.0240508012&lt;/td&gt;&lt;td&gt; -0.125714&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0456970689&lt;/td&gt;&lt;td&gt;    0.0239991032&lt;/td&gt;&lt;td&gt;    0.9986670221&lt;/td&gt;&lt;td&gt; -0.017107&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;Tango Bottom Pose&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;TBP&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.9986085337&lt;/td&gt;&lt;td&gt;    0.0027720770&lt;/td&gt;&lt;td&gt;   -0.0526622452&lt;/td&gt;&lt;td&gt; -0.006998&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;    0.0192066304&lt;/td&gt;&lt;td&gt;   -0.9491479460&lt;/td&gt;&lt;td&gt;    0.3142439848&lt;/td&gt;&lt;td&gt; -0.074008&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;   -0.0491131534&lt;/td&gt;&lt;td&gt;   -0.3148181892&lt;/td&gt;&lt;td&gt;   -0.9478804808&lt;/td&gt;&lt;td&gt; -0.058834&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
 </description>
     </item>
     
