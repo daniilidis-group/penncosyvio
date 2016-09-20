@@ -17,17 +17,20 @@
       <guid>https://daniilidis-group.github.io/penncosyvio/extrinsic_calib/</guid>
       <description>
 
-&lt;h2 id=&#34;extrinsic-calibration&#34;&gt;Extrinsic Calibration&lt;/h2&gt;
+&lt;h2 id=&#34;rig-and-coordinate-system-conventions&#34;&gt;Rig and Coordinate System Conventions&lt;/h2&gt;
 
-&lt;p&gt;&lt;p&gt;All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform &lt;B&gt;T&lt;/B&gt; from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed, i.e. &lt;SUP&gt;C1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; are the coordinates of vector &lt;B&gt;X&lt;/B&gt; in the reference frame of camera C1. The transform &lt;SUP&gt;S2&lt;/SUP&gt; &lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;S1&lt;/SUB&gt; takes a vector expressed in coordinate system S1 and transforms it to system S2: &lt;SUP&gt;S2&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; = &lt;SUP&gt;S2&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;S1&lt;/SUB&gt; &lt;SUP&gt;S1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt;. For example, given coordinates in the rig reference frame (B), the ones in camera C1 can be obtained via:
+&lt;p&gt;&lt;img src=&#34;../pics/rig.jpg&#34; width=&#34;500&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform &lt;B&gt;T&lt;/B&gt; from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed, i.e. &lt;SUP&gt;C1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; are the coordinates of vector &lt;B&gt;X&lt;/B&gt; in the reference frame of camera C1. The transform &lt;SUP&gt;S2&lt;/SUP&gt; &lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;S1&lt;/SUB&gt; takes a vector expressed in coordinate system S1 and transforms it to system S2: &lt;SUP&gt;S2&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; = &lt;SUP&gt;S2&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;S1&lt;/SUB&gt; &lt;SUP&gt;S1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt;. For example, given coordinates in the rig reference frame (B), the ones in camera C1 can be obtained via:
 &lt;p&gt;&lt;SUP&gt;C1&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt; = &lt;SUP&gt;C1&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt; &lt;SUP&gt;B&lt;/SUP&gt;&lt;B&gt;X&lt;/B&gt;&lt;/p&gt;
-&lt;p&gt;The transform T can be expressed as a 3x4 transformation matrix:&lt;/p&gt;
+## Transformations in Matrix Form
+&lt;p&gt;In the below table, the transform T can be expressed as a 3x4 transformation matrix:&lt;/p&gt;
 &lt;p&gt;&lt;B&gt;T&lt;/B&gt; = [&lt;B&gt;R&lt;/B&gt;, &lt;B&gt;t&lt;/B&gt;]&lt;/p&gt;
-&lt;p&gt;where &lt;B&gt;t&lt;/B&gt; is a 3x1 translation vector, and &lt;B&gt;R&lt;/B&gt; is a pure rotation.&lt;/p&gt;
-
+&lt;p&gt;where &lt;B&gt;t&lt;/B&gt; is a 3x1 translation vector, and &lt;B&gt;R&lt;/B&gt; is a pure rotation.
+Note that the translation vector &lt;B&gt;t&lt;/B&gt; is expressed in meters, and is given in the coordinate system of the sensor.
 &lt;table&gt;
 &lt;tr&gt;
-&lt;td&gt;Sensor&lt;/td&gt;&lt;td&gt;Transform&lt;/td&gt;&lt;td colspan=&#34;4&#34; class=&#34;tdcenter&#34;&gt;&lt;B&gt;T&lt;/B&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;td&gt;Sensor&lt;/td&gt;&lt;td&gt;Transform&lt;/td&gt;&lt;td colspan=&#34;4&#34; class=&#34;tdcenter&#34; align=&#34;center&#34;&gt;&lt;B&gt;T&lt;/B&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td rowspan=&#34;3&#34;&gt;GoPro C1&lt;/td&gt;&lt;td rowspan=&#34;3&#34;&gt;&lt;SUP&gt;C1&lt;/SUP&gt;&lt;B&gt;T&lt;/B&gt;&lt;SUB&gt;B&lt;/SUB&gt;&lt;/td&gt;&lt;td&gt;    0.2961304418&lt;/td&gt;&lt;td&gt;    0.0011052645&lt;/td&gt;&lt;td&gt;    0.9551468682&lt;/td&gt;&lt;td&gt;  0.082674&lt;/td&gt;&lt;/tr&gt;
 &lt;td&gt;    0.0191451276&lt;/td&gt;&lt;td&gt;    0.9997915577&lt;/td&gt;&lt;td&gt;   -0.0070926152&lt;/td&gt;&lt;td&gt;  0.002503&lt;/td&gt;&lt;/tr&gt;
 &lt;td&gt;   -0.9549556144&lt;/td&gt;&lt;td&gt;    0.0203867479&lt;/td&gt;&lt;td&gt;    0.2960475553&lt;/td&gt;&lt;td&gt; -0.127252&lt;/td&gt;&lt;/tr&gt;
@@ -62,6 +65,60 @@
 &lt;td&gt;    0.0192066304&lt;/td&gt;&lt;td&gt;   -0.9491479460&lt;/td&gt;&lt;td&gt;    0.3142439848&lt;/td&gt;&lt;td&gt; -0.074008&lt;/td&gt;&lt;/tr&gt;
 &lt;td&gt;   -0.0491131534&lt;/td&gt;&lt;td&gt;   -0.3148181892&lt;/td&gt;&lt;td&gt;   -0.9478804808&lt;/td&gt;&lt;td&gt; -0.058834&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
+
+## Transformations in Quaternion Form
+&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;x&lt;/td&gt;&lt;td&gt;y&lt;/td&gt;&lt;td&gt;z&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;R=&lt;/td&gt;&lt;td&gt;x&lt;/td&gt;&lt;td&gt;y&lt;/td&gt;&lt;td&gt;z&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;x&lt;/td&gt;&lt;td&gt;y&lt;/td&gt;&lt;td&gt;z&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;style&gt;
+.matrix {
+    position: relative;
+}
+.matrix:before, .matrix:after {
+    content: &#34;&#34;;
+    position: absolute;
+    top: 0;
+    border: 1px solid #000;
+    width: 6px;
+    height: 100%;
+}
+.matrix:before {
+    left: -6px;
+    border-right: 0;
+}
+.matrix:after {
+    right: -6px;
+    border-left: 0;
+}
+&lt;/style&gt;
+&lt;div align=center&gt;
+    &lt;table class=&#34;matrix&#34;&gt;
+        &lt;tr&gt;
+            &lt;td&gt;1+3i&lt;/td&gt;
+            &lt;td&gt;2+i&lt;/td&gt;
+            &lt;td&gt;10&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;4-3i&lt;/td&gt;
+            &lt;td&gt;5&lt;/td&gt;
+            &lt;td&gt;-2&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;script type=&#34;text/x-mathjax-config&#34;&gt;
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [[&#34;$&#34;,&#34;$&#34;],[&#34;\\(&#34;,&#34;\\)&#34;]]}
+  });
+&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;../MathJax.js?config=TeX-AMS_HTML-full&#34;&gt;&lt;/script&gt;
+&lt;p&gt;
+When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
+$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+&lt;/p&gt;
 </description>
     </item>
     

@@ -52,6 +52,10 @@
     <link rel="stylesheet" href="https://daniilidis-group.github.io/penncosyvio/stylesheets/palettes.css">
     <link rel="stylesheet" href="https://daniilidis-group.github.io/penncosyvio/stylesheets/highlight/highlight.css">
 
+    <script type="text/javascript"
+	    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
     
     
     
@@ -260,17 +264,20 @@
 
 			
 
-<h2 id="extrinsic-calibration">Extrinsic Calibration</h2>
+<h2 id="rig-and-coordinate-system-conventions">Rig and Coordinate System Conventions</h2>
 
-<p><p>All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform <B>T</B> from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed, i.e. <SUP>C1</SUP><B>X</B> are the coordinates of vector <B>X</B> in the reference frame of camera C1. The transform <SUP>S2</SUP> <B>T</B><SUB>S1</SUB> takes a vector expressed in coordinate system S1 and transforms it to system S2: <SUP>S2</SUP><B>X</B> = <SUP>S2</SUP><B>T</B><SUB>S1</SUB> <SUP>S1</SUP><B>X</B>. For example, given coordinates in the rig reference frame (B), the ones in camera C1 can be obtained via:
+<p><img src="../pics/rig.jpg" width="500"></p>
+
+<p>All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform <B>T</B> from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed, i.e. <SUP>C1</SUP><B>X</B> are the coordinates of vector <B>X</B> in the reference frame of camera C1. The transform <SUP>S2</SUP> <B>T</B><SUB>S1</SUB> takes a vector expressed in coordinate system S1 and transforms it to system S2: <SUP>S2</SUP><B>X</B> = <SUP>S2</SUP><B>T</B><SUB>S1</SUB> <SUP>S1</SUP><B>X</B>. For example, given coordinates in the rig reference frame (B), the ones in camera C1 can be obtained via:
 <p><SUP>C1</SUP><B>X</B> = <SUP>C1</SUP><B>T</B><SUB>B</SUB> <SUP>B</SUP><B>X</B></p>
-<p>The transform T can be expressed as a 3x4 transformation matrix:</p>
+## Transformations in Matrix Form
+<p>In the below table, the transform T can be expressed as a 3x4 transformation matrix:</p>
 <p><B>T</B> = [<B>R</B>, <B>t</B>]</p>
-<p>where <B>t</B> is a 3x1 translation vector, and <B>R</B> is a pure rotation.</p>
-
+<p>where <B>t</B> is a 3x1 translation vector, and <B>R</B> is a pure rotation.
+Note that the translation vector <B>t</B> is expressed in meters, and is given in the coordinate system of the sensor.
 <table>
 <tr>
-<td>Sensor</td><td>Transform</td><td colspan="4" class="tdcenter"><B>T</B></td></tr>
+<td>Sensor</td><td>Transform</td><td colspan="4" class="tdcenter" align="center"><B>T</B></td></tr>
 <tr><td rowspan="3">GoPro C1</td><td rowspan="3"><SUP>C1</SUP><B>T</B><SUB>B</SUB></td><td>    0.2961304418</td><td>    0.0011052645</td><td>    0.9551468682</td><td>  0.082674</td></tr>
 <td>    0.0191451276</td><td>    0.9997915577</td><td>   -0.0070926152</td><td>  0.002503</td></tr>
 <td>   -0.9549556144</td><td>    0.0203867479</td><td>    0.2960475553</td><td> -0.127252</td></tr>
@@ -305,6 +312,60 @@
 <td>    0.0192066304</td><td>   -0.9491479460</td><td>    0.3142439848</td><td> -0.074008</td></tr>
 <td>   -0.0491131534</td><td>   -0.3148181892</td><td>   -0.9478804808</td><td> -0.058834</td></tr>
 </table>
+
+## Transformations in Quaternion Form
+<table>
+<tr><td></td><td>x</td><td>y</td><td>z</td></tr>
+<tr><td>R=</td><td>x</td><td>y</td><td>z</td></tr>
+<tr><td></td><td>x</td><td>y</td><td>z</td></tr>
+</table>
+
+<style>
+.matrix {
+    position: relative;
+}
+.matrix:before, .matrix:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border: 1px solid #000;
+    width: 6px;
+    height: 100%;
+}
+.matrix:before {
+    left: -6px;
+    border-right: 0;
+}
+.matrix:after {
+    right: -6px;
+    border-left: 0;
+}
+</style>
+<div align=center>
+    <table class="matrix">
+        <tr>
+            <td>1+3i</td>
+            <td>2+i</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>4-3i</td>
+            <td>5</td>
+            <td>-2</td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+  });
+</script>
+<script type="text/javascript" src="../MathJax.js?config=TeX-AMS_HTML-full"></script>
+<p>
+When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
+$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+</p>
 
 
 			<footer class="footer">
