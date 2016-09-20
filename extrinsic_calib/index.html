@@ -52,10 +52,6 @@
     <link rel="stylesheet" href="https://daniilidis-group.github.io/penncosyvio/stylesheets/palettes.css">
     <link rel="stylesheet" href="https://daniilidis-group.github.io/penncosyvio/stylesheets/highlight/highlight.css">
 
-    <script type="text/javascript"
-	    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
-
     
     
     
@@ -73,6 +69,26 @@
     <link rel="stylesheet" href="https://daniilidis-group.github.io/penncosyvio/tweaks.css">
     
     <script src="https://daniilidis-group.github.io/penncosyvio/javascripts/modernizr.js"></script>
+    <script type="text/javascript"
+	    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { 
+      preferredFont: "TeX", 
+      availableFonts: ["STIX","TeX"], 
+      styles: {".MathJax": {color: "#000 !important"}} 
+      }
+});
+</script>
 
     
 
@@ -270,11 +286,15 @@
 
 <p>All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform <B>T</B> from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed, i.e. <SUP>C1</SUP><B>X</B> are the coordinates of vector <B>X</B> in the reference frame of camera C1. The transform <SUP>S2</SUP> <B>T</B><SUB>S1</SUB> takes a vector expressed in coordinate system S1 and transforms it to system S2: <SUP>S2</SUP><B>X</B> = <SUP>S2</SUP><B>T</B><SUB>S1</SUB> <SUP>S1</SUP><B>X</B>. For example, given coordinates in the rig reference frame (B), the ones in camera C1 can be obtained via:
 <p><SUP>C1</SUP><B>X</B> = <SUP>C1</SUP><B>T</B><SUB>B</SUB> <SUP>B</SUP><B>X</B></p>
-## Transformations in Matrix Form
+
+<h2 id="transformations-in-matrix-form">Transformations in Matrix Form</h2>
+
 <p>In the below table, the transform T can be expressed as a 3x4 transformation matrix:</p>
 <p><B>T</B> = [<B>R</B>, <B>t</B>]</p>
 <p>where <B>t</B> is a 3x1 translation vector, and <B>R</B> is a pure rotation.
 Note that the translation vector <B>t</B> is expressed in meters, and is given in the coordinate system of the sensor.
+</p>
+
 <table>
 <tr>
 <td>Sensor</td><td>Transform</td><td colspan="4" class="tdcenter" align="center"><B>T</B></td></tr>
@@ -313,59 +333,18 @@ Note that the translation vector <B>t</B> is expressed in meters, and is given i
 <td>   -0.0491131534</td><td>   -0.3148181892</td><td>   -0.9478804808</td><td> -0.058834</td></tr>
 </table>
 
-## Transformations in Quaternion Form
-<table>
-<tr><td></td><td>x</td><td>y</td><td>z</td></tr>
-<tr><td>R=</td><td>x</td><td>y</td><td>z</td></tr>
-<tr><td></td><td>x</td><td>y</td><td>z</td></tr>
-</table>
+<h2 id="transformations-in-quaternion-form">Transformations in Quaternion Form</h2>
 
-<style>
-.matrix {
-    position: relative;
-}
-.matrix:before, .matrix:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    border: 1px solid #000;
-    width: 6px;
-    height: 100%;
-}
-.matrix:before {
-    left: -6px;
-    border-right: 0;
-}
-.matrix:after {
-    right: -6px;
-    border-left: 0;
-}
-</style>
-<div align=center>
-    <table class="matrix">
-        <tr>
-            <td>1+3i</td>
-            <td>2+i</td>
-            <td>10</td>
-        </tr>
-        <tr>
-            <td>4-3i</td>
-            <td>5</td>
-            <td>-2</td>
-        </tr>
-    </table>
-</div>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
-  });
-</script>
-<script type="text/javascript" src="../MathJax.js?config=TeX-AMS_HTML-full"></script>
-<p>
-When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
-$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
-</p>
+<p>The rotation matrix $\color{black}{R}$ is related to the unit
+quaternion $\color{black}{(q_w, q_x, q_y, q_z)}$ via:
+$$
+\color{black}{
+R = {\begin{pmatrix}
+1 -2q_y^2-2q_z^2 &amp; 2q_xq_y - 2q_zq_w &amp; 2q_xq_z + 2q_yq_w\\
+2q_xq_y + 2q_zq_w &amp; 1 - 2q_x^2 -2 q_z^2 &amp; 2q_yq_z -2 q_xq_w\\
+2q_xq_z -2 q_yq_w &amp; 2q_yq_z + 2 q_xq_w &amp; 1-2q_x^2-2q_y^2\\
+\end{pmatrix}}}
+$$</p>
 
 
 			<footer class="footer">
