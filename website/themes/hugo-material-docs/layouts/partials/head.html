@@ -69,6 +69,40 @@
     <link rel="stylesheet" href="{{ $.Site.BaseURL }}{{ . }}">
     {{ end }}
     <script src="{{ .Site.BaseURL }}javascripts/modernizr.js"></script>
+    <script type="text/javascript"
+	    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { 
+      preferredFont: "TeX", 
+      availableFonts: ["STIX","TeX"], 
+      styles: {".MathJax": {color: "#000 !important"}} 
+      }
+});
+</script>
+$
+\newcommand{\cc}[1]{\color{black}{#1}}
+\newcommand{\mvec}[1]{\mathbf{#1}}
+\newcommand{\cvec}[2]{^\mathrm{#2}\mathbf{#1}}
+\newcommand{\ctrans}[3]{^\mathrm{#3}\mathbf{#1}_\mathrm{#2}}
+\newcommand{\rmat}[9]{\cc{\begin{bmatrix}{#1}&{#2}&{#3}\\\ {#4}&{#5}&{#6}\\\ {#7}&{#8}&{#9}\end{bmatrix}}}
+\newcommand{\hmat}[3]{\cc{\begin{bmatrix}{#1}\\\ {#2}\\\ {#3}\\\ \end{bmatrix}}}
+\newcommand{\mq}[4]{\cc{\begin{bmatrix}{#1}&{#2}&{#3}&{#4}\\\ \end{bmatrix}}}
+\newcommand{\nvec}[3]{\cc{\begin{bmatrix}{#1}&{#2}&{#3}\\\ \end{bmatrix}}}
+\newcommand{\vvec}[3]{\cc{\begin{bmatrix}{#1}\\\ {#2}\\\ {#3}\end{bmatrix}}}
+\newcommand{\vvt}[2]{\cc{\begin{bmatrix}{#1}\\\ {#2}\end{bmatrix}}}
+\newcommand{\calmat}[4]{\cc{\begin{bmatrix}{#1}&0&{#3}\\\ 0&{#2}&{#4}\end{bmatrix}}}
+\newcommand{\dp}{^{\prime\prime}}
+$
 
     {{ with .RSSlink }}
     <link href="{{ . }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
