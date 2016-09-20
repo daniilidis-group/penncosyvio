@@ -17,9 +17,157 @@
       <guid>https://daniilidis-group.github.io/penncosyvio/intrinsic_calib/</guid>
       <description>
 
-&lt;h2 id=&#34;intrinsic-calibration&#34;&gt;Intrinsic Calibration&lt;/h2&gt;
+&lt;p&gt;Two different models were used for the intrinsic calibration of the cameras:&lt;/p&gt;
 
-&lt;p&gt;Not online yet&amp;hellip;..&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.mathworks.com/help/vision/ug/camera-calibration.html&#34;&gt;standard perspective&lt;/a&gt;
+model with two radial distortion distortion coefficients.
+This model works well for the Tango Bottom RGB camera and the VI sensor cameras&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sites.google.com/site/scarabotix/ocamcalib-toolbox&#34;&gt;omnidirectional model&lt;/a&gt; for
+the GoPro cameras and the Tango Top. This is necessary to accurately
+model the wide-angle lenses projection function all the way to the corners of the sensor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A square chessboard calibration target of 7x8 was used with square
+length of 108mm. The images were cut from video, and are available
+under the &lt;code&gt;intrinsic_calibration&lt;/code&gt; directory (requires separate download).&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-use-the-calibration-models&#34;&gt;How to Use the Calibration Models&lt;/h2&gt;
+
+&lt;p&gt;The camera calibration models are stored under &lt;code&gt;dev/intrinsic_calibration/cc.mat&lt;/code&gt; and can be loaded
+in Matlab like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; cd dev/matlab;
+&amp;gt;&amp;gt; load ../intrinsic_calibration/cc.mat
+&amp;gt;&amp;gt; cc
+
+cc = 
+
+    [1x1 struct]    [1x1 struct]    [1x1 struct]    [1x1 cameraParameters]    [1x1 struct]    [1x1 cameraParameters]    [1x1 cameraParameters]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;cc&lt;/code&gt; cell array has the cameras in the order:
+&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoPro C1&lt;/td&gt;&lt;td&gt;GoPro C2&lt;/td&gt;&lt;td&gt; GoPro C3&lt;/td&gt;&lt;td&gt; Tango Bottom&lt;/td&gt;&lt;td&gt; Tango Top&lt;/td&gt;&lt;td&gt;VI Sensor Left&lt;/td&gt;&lt;td&gt;VI Sensor Right&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;undistorting-tango-bottom-and-vi-sensor-images&#34;&gt;Undistorting Tango Bottom and VI Sensor images&lt;/h3&gt;
+
+&lt;p&gt;To undistort images for Tango Bottom&amp;rsquo;s RGB camera or the VI Sensors, you can directly use the Matlab &lt;code&gt;undistortImage&lt;/code&gt; function. The following matlab
+line would read an image, undistort it with the Tango Bottom calibration parameters, and display it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; imtool(undistortImage(imread(&#39;foo.jpg&#39;),cc{4}));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;undistorting-gopro-and-tango-top-images&#34;&gt;Undistorting GoPro and Tango Top Images&lt;/h3&gt;
+
+&lt;p&gt;Images taken with the fisheye lenses require the use of a custom undistortion matlab function for undistortion.
+Undistortion is a two-step process: first a undistortion map is
+pre-computed (this needs to be done only once per camera),
+which then is used to perform the actual undistortion. For example, this would be the steps to undistort an image
+for GoPro camera C1:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; u = ocam_undistort_map(cc{1}, &#39;OutputView&#39;, &#39;full&#39;);
+&amp;gt;&amp;gt; imtool(ocam_undistort(imread(&#39;../../intrinsic_calibration/c1/frame_0011.png&#39;), u));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img alt=&#34;distorted original&#34; src=&#34;../pics/intcalib/c1_dist.jpg&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img alt=&#34;undistorted&#34; src=&#34;../pics/intcalib/c1_undist.jpg&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;For more undistortion options, see &lt;code&gt;help ocam_undistort_map&lt;/code&gt;. In
+particular setting &lt;code&gt;OutputView&lt;/code&gt; to &lt;code&gt;same&lt;/code&gt; is a useful choice, but you
+can also increase the resolution to reduce quality loss during
+undistort. Note that the intrinsic matrix $\mvec{K}$ depends on the undistortion
+mode used, and is in fact a field of the undistortion structure:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; u
+u = 
+    map: [2073600x2 double]
+      K: [3x3 double]
+    res: [1920 1080]
+&amp;gt;&amp;gt; u.K&#39;
+ans =
+          472.402621799665                         0          958.773771858922
+                         0          476.268511742695          539.250755510546
+                         0                         0                         1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If instead &lt;code&gt;OutputView&lt;/code&gt; &lt;code&gt;same&lt;/code&gt; is used, the focal lengths will increase substantially!&lt;/p&gt;
+
+&lt;h2 id=&#34;matlab-toolbox-tango-bottom-and-vi-sensors&#34;&gt;Matlab Toolbox: Tango Bottom and VI Sensors&lt;/h2&gt;
+
+&lt;p&gt;We use Matlab&amp;rsquo;s built-in camera calibration tool, which uses the
+camera model proposed by &lt;a href=&#34;http://www.vision.caltech.edu/bouguetj/calib_doc/&#34; title=&#34;Bouguet, J. Y.: Camera Calibration Toolbox for Matlab. Computational Vision at the California Institute of Technology.&#34;&gt;Bouguet&lt;/a&gt; for the CalTec Camera Calibration
+Toolbox. The model consists of a perspective projection followed by a
+radial distortion. For parsimony, we did not allow for skew or
+tangential distortion, and limited the number of radial distortion
+coefficients to two. This leads to the following model: the 3D point
+$\cc{\cvec{X}{W}}$ in world coordinates is first transformed to the camera
+frame by the current camera pose $\cc{\ctrans{T}{W}{C}}$:
+$$
+\cc{\vvec{x}{y}{z}=\ \cvec{X}{C}=\ \ctrans{T}{W}{C}\ \cvec{X}{W}}.
+$$
+Then, the projected 2D coordinates are obtained via:
+$$
+\cc{\vvt{x&amp;rsquo;}{y&amp;rsquo;} =\ \vvt{x/z}{y/z}}.
+$$
+Now the radial distortion is captured by:
+$$
+\cc{\vvt{x\dp}{y\dp} =\ \vvt{x&amp;rsquo;(1+k_1r&amp;rsquo;^2 +k_2r&amp;rsquo;^4)}{y&amp;rsquo;(1+k_1r&amp;rsquo;^2 +k_2r&amp;rsquo;^4)}},
+$$
+where $\cc{r&amp;rsquo;^2 = x&amp;rsquo;^2 + y&amp;rsquo;^2}$. Lastly, using the intrinsic matrix yields the sensor pixel coordinates:
+$$
+\cc{\vvt{u}{v} = \begin{bmatrix}f_x &amp;amp; 0 &amp;amp; c_x\\ 0 &amp;amp; f_y &amp;amp; c_y\end{bmatrix}\vvec{x\dp}{y\dp}{1}}.
+$$&lt;/p&gt;
+
+&lt;p&gt;Note that the camera models as stored in the Matlab cell array (see &lt;a href=&#34;#foo&#34;&gt;above&lt;/a&gt;) follow
+Matlab convention, so their intrinsic matrix is transposed compared to the table below!
+The VI sensor calibration is based off the rectified images (this explains why the radial distortion is virtually zero),
+and is therefore the correct calibration to use for the rectified video frames in the ROS bag.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;Camera&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}f_x &amp; 0 &amp; c_x\\\ 0 &amp; f_y &amp; c_y\end{bmatrix}}$&lt;/td&gt;&lt;td&gt;$\cc{k_1}$&lt;/td&gt;&lt;td&gt;$\cc{k_2}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Tango Bottom RGB&lt;/td&gt;&lt;td&gt;$\cc{\calmat{   1959.84}{   1959.39}{    981.87}{    524.94}}$&lt;/td&gt;&lt;td&gt; 0.21253&lt;/td&gt;&lt;td&gt;-0.46023&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;VI Sensor Left&lt;/td&gt;&lt;td&gt;$\cc{\calmat{    445.80}{    445.15}{    371.50}{    237.33}}$&lt;/td&gt;&lt;td&gt;-0.03671&lt;/td&gt;&lt;td&gt; 0.05260&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;VI Sensor Right&lt;/td&gt;&lt;td&gt;$\cc{\calmat{    445.75}{    445.23}{    369.28}{    238.72}}$&lt;/td&gt;&lt;td&gt;-0.03427&lt;/td&gt;&lt;td&gt; 0.04858&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;fisheye-intrinsic-calibration-using-ocamcalib-toolbox&#34;&gt;Fisheye Intrinsic Calibration using OCamCalib Toolbox&lt;/h2&gt;
+
+&lt;p&gt;We used the &lt;a href=&#34;https://sites.google.com/site/scarabotix/ocamcalib-toolbox/&#34; title=&#34;Scaramuzza, D: OCamCalib: Omnidirectional Camera Calibration Toolbox for Matlab.&#34;&gt;OCamCalib Toolbox&lt;/a&gt; (version 3.0) to fit a 4-parameter
+polynomial to the forward projection function. The image center was
+held fixed for parsimony, and because good results (less than 1px
+average reprojection error) were obtained already without allowing the
+center to float.&lt;/p&gt;
+
+&lt;p&gt;Here the forward projection function of the GoPro Hero 4 camera
+C2. Note that the horizontal FOV is twice the angle covered in the
+graph (which is about 60 degrees).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../pics/intcalib/c2_projfun.jpg&#34; alt=&#34;forward projection function&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here a graphical illustration of the different extrinsic positions that
+were assumed, showing that we took images with the calibration target as
+far in the corner as possible:
+&lt;img src=&#34;../pics/intcalib/c2_ext.jpg&#34; alt=&#34;external calibration positions&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;These are the calibration parameters obtained from the toolbox. Refer
+to &lt;a href=&#34;https://sites.google.com/site/scarabotix/ocamcalib-toolbox/&#34; title=&#34;Scaramuzza, D: OCamCalib: Omnidirectional Camera Calibration Toolbox for Matlab.&#34;&gt;2&lt;/a&gt; for description of the parameters and the camera model:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;Camera&lt;/td&gt;&lt;td&gt;width&lt;/td&gt;&lt;td&gt;height&lt;/td&gt;&lt;td&gt;xc&lt;/td&gt;&lt;td&gt;yc&lt;/td&gt;&lt;td&gt;c&lt;/td&gt;&lt;td&gt;d&lt;/td&gt;&lt;td&gt;e&lt;/td&gt;&lt;td&gt;ss [polynomial coefficients]&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoPro C1&lt;/td&gt;&lt;td&gt;1920&lt;/td&gt;&lt;td&gt;1080&lt;/td&gt;&lt;td&gt;539.9&lt;/td&gt;&lt;td&gt;959.9&lt;/td&gt;&lt;td&gt;1.008&lt;/td&gt;&lt;td&gt;2.710e-04&lt;/td&gt;&lt;td&gt;-3.229e-04&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-867.43&amp;0.000000&amp;3.1130e-04&amp;5.1424e-08&amp;-3.3722e-11\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoPro C2&lt;/td&gt;&lt;td&gt;1920&lt;/td&gt;&lt;td&gt;1080&lt;/td&gt;&lt;td&gt;539.9&lt;/td&gt;&lt;td&gt;959.9&lt;/td&gt;&lt;td&gt;1.004&lt;/td&gt;&lt;td&gt;-4.473e-04&lt;/td&gt;&lt;td&gt;-1.378e-03&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-877.47&amp;0.000000&amp;3.3388e-04&amp;-9.2419e-09&amp;1.1041e-11\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoPro C3&lt;/td&gt;&lt;td&gt;1920&lt;/td&gt;&lt;td&gt;1080&lt;/td&gt;&lt;td&gt;539.9&lt;/td&gt;&lt;td&gt;959.9&lt;/td&gt;&lt;td&gt;1.006&lt;/td&gt;&lt;td&gt;1.794e-04&lt;/td&gt;&lt;td&gt;-8.563e-04&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-875.98&amp;0.000000&amp;3.3576e-04&amp;-3.0754e-08&amp;2.8774e-11\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Tango Top Fisheye&lt;/td&gt;&lt;td&gt;640&lt;/td&gt;&lt;td&gt;480&lt;/td&gt;&lt;td&gt;240.0&lt;/td&gt;&lt;td&gt;320.0&lt;/td&gt;&lt;td&gt;1.000&lt;/td&gt;&lt;td&gt;4.162e-04&lt;/td&gt;&lt;td&gt;1.303e-04&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-273.59&amp;0.000000&amp;1.2923e-03&amp;-8.7901e-07&amp;2.7410e-09\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
 </description>
     </item>
     

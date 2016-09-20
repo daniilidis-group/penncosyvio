@@ -89,6 +89,20 @@ MathJax.Hub.Config({
       }
 });
 </script>
+$
+\newcommand{\cc}[1]{\color{black}{#1}}
+\newcommand{\mvec}[1]{\mathbf{#1}}
+\newcommand{\cvec}[2]{^\mathrm{#2}\mathbf{#1}}
+\newcommand{\ctrans}[3]{^\mathrm{#3}\mathbf{#1}_\mathrm{#2}}
+\newcommand{\rmat}[9]{\cc{\begin{bmatrix}{#1}&{#2}&{#3}\\\ {#4}&{#5}&{#6}\\\ {#7}&{#8}&{#9}\end{bmatrix}}}
+\newcommand{\hmat}[3]{\cc{\begin{bmatrix}{#1}\\\ {#2}\\\ {#3}\\\ \end{bmatrix}}}
+\newcommand{\mq}[4]{\cc{\begin{bmatrix}{#1}&{#2}&{#3}&{#4}\\\ \end{bmatrix}}}
+\newcommand{\nvec}[3]{\cc{\begin{bmatrix}{#1}&{#2}&{#3}\\\ \end{bmatrix}}}
+\newcommand{\vvec}[3]{\cc{\begin{bmatrix}{#1}\\\ {#2}\\\ {#3}\end{bmatrix}}}
+\newcommand{\vvt}[2]{\cc{\begin{bmatrix}{#1}\\\ {#2}\end{bmatrix}}}
+\newcommand{\calmat}[4]{\cc{\begin{bmatrix}{#1}&0&{#3}\\\ 0&{#2}&{#4}\end{bmatrix}}}
+\newcommand{\dp}{^{\prime\prime}}
+$
 
     
 

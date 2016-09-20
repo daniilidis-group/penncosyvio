@@ -20,17 +20,8 @@
 &lt;h2 id=&#34;rig-and-coordinate-system-conventions&#34;&gt;Rig and Coordinate System Conventions&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;../pics/rig.jpg&#34; width=&#34;500&#34;&gt;
-$
-\newcommand{\cc}[1]{\color{black}{#1}}
-\newcommand{\mvec}[1]{\mathbf{#1}}
-\newcommand{\cvec}[2]{^\mathrm{#2}\mathbf{#1}}
-\newcommand{\ctrans}[3]{^\mathrm{#3}\mathbf{#1}_\mathrm{#2}}
-\newcommand{\rmat}[9]{\cc{\begin{bmatrix}{#1}&amp;amp;{#2}&amp;amp;{#3}\\ {#4}&amp;amp;{#5}&amp;amp;{#6}\\ {#7}&amp;amp;{#8}&amp;amp;{#9}\end{bmatrix}}}
-\newcommand{\hmat}[3]{\cc{\begin{bmatrix}{#1}\\ {#2}\\ {#3}\\ \end{bmatrix}}}
-\newcommand{\mq}[4]{\cc{\begin{bmatrix}{#1}&amp;amp;{#2}&amp;amp;{#3}&amp;amp;{#4}\\ \end{bmatrix}}}
-\newcommand{\nvec}[3]{\cc{\begin{bmatrix}{#1}&amp;amp;{#2}&amp;amp;{#3}\\ \end{bmatrix}}}
-$
-&lt;p&gt;All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform $\cc{\mvec{T}}$ from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed, i.e. $\cc{\cvec{X}{C1}}$ are the coordinates of vector $\cc{X}$ in the reference frame of camera C1. The transform $\cc{\ctrans{T}{S1}{S2}}$ takes a vector expressed in coordinate system S1 and transforms it to system S2: $\cc{\cvec{X}{S2}=\ctrans{T}{S1}{S2}\ \cvec{X}{S1}}$. For example, given coordinates in the rig reference frame (B), the ones for camera C1 can be obtained via:
+&lt;p&gt;All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera).
+For each sensor we give the transform $\cc{\mvec{T}}$ from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed, i.e. $\cc{\cvec{X}{C1}}$ are the coordinates of vector $\cc{X}$ in the reference frame of camera C1. The transform $\cc{\ctrans{T}{S1}{S2}}$ takes a vector expressed in coordinate system S1 and transforms it to system S2: $\cc{\cvec{X}{S2}=\ctrans{T}{S1}{S2}\ \cvec{X}{S1}}$. For example, given coordinates in the rig reference frame (B), the ones for camera C1 can be obtained via:
 $$
 \cc{\cvec{X}{C1}=\ctrans{T}{B}{C1}\ \cvec{X}{B}}
 $$.&lt;/p&gt;
@@ -87,6 +78,27 @@ $$&lt;/p&gt;
 &lt;tr&gt;&lt;td&gt;VI Sensor IMU&lt;/td&gt;&lt;td&gt;$\cc{\ctrans{T}{B}{VI}}$&lt;/td&gt;&lt;td&gt;$\mq{    0.9996665399}{    0.0120164831}{   -0.0228493568}{    0.0005656387}$&lt;/td&gt;&lt;td&gt;$\nvec{   -0.0310}{   -0.1257}{   -0.0171}$&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td&gt;Tango Bottom Pose&lt;/td&gt;&lt;td&gt;$\cc{\ctrans{T}{B}{TBP}}$&lt;/td&gt;&lt;td&gt;$\mq{   -0.1593581712}{    0.9868684006}{    0.0055677908}{   -0.0257824140}$&lt;/td&gt;&lt;td&gt;$\nvec{   -0.0070}{   -0.0740}{   -0.0588}$&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
+
+&lt;h2 id=&#34;extrinsic-calibration-method&#34;&gt;Extrinsic calibration method&lt;/h2&gt;
+
+&lt;p&gt;The AprilTags on the north wall of the Singh Center were used as a calibration target. A total of 16 synchronized snapshots were cut from the video footage, and optical calibration was performed as described in a forthcoming paper. As an example, here is a picture of snapshot #4. The complete set of images is available for download, as well as the locations of the AprilTags in that area.
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;figure&gt;&lt;img src=&#34;../pics/extcalib/ec_vl.jpg&#34; width=&#34;500&#34;&gt;&lt;figcaption&gt;VI Sensor left&lt;/figcaption&gt;&lt;/figure&gt;&lt;/td&gt;
+&lt;td&gt;&lt;figure&gt;&lt;img src=&#34;../pics/extcalib/ec_vr.jpg&#34; width=&#34;500&#34;&gt;&lt;figcaption&gt;VI Sensor right&lt;/figcaption&gt;&lt;/figure&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;figure&gt;&lt;img src=&#34;../pics/extcalib/ec_tb.jpg&#34; width=&#34;500&#34;&gt;&lt;figcaption&gt;Tango Bottom&lt;/figcaption&gt;&lt;/figure&gt;&lt;/td&gt;
+&lt;td&gt;&lt;figure&gt;&lt;img src=&#34;../pics/extcalib/ec_tt.jpg&#34; width=&#34;500&#34;&gt;&lt;figcaption&gt;Tango Top&lt;/figcaption&gt;&lt;/figure&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;figure&gt;&lt;img src=&#34;../pics/extcalib/ec_c1.jpg&#34; width=&#34;500&#34;&gt;&lt;figcaption&gt;GoPro C1&lt;/figcaption&gt;&lt;/figure&gt;&lt;/td&gt;
+&lt;td&gt;&lt;figure&gt;&lt;img src=&#34;../pics/extcalib/ec_c2.jpg&#34; width=&#34;500&#34;&gt;&lt;figcaption&gt;GoPro C2&lt;/figcaption&gt;&lt;/figure&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;figure&gt;&lt;img src=&#34;../pics/extcalib/ec_c3.jpg&#34; width=&#34;500&#34;&gt;&lt;figcaption&gt;GoPro C3&lt;/figcaption&gt;&lt;/figure&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;&lt;/p&gt;
 </description>
     </item>
     

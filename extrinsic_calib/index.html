@@ -89,6 +89,20 @@ MathJax.Hub.Config({
       }
 });
 </script>
+$
+\newcommand{\cc}[1]{\color{black}{#1}}
+\newcommand{\mvec}[1]{\mathbf{#1}}
+\newcommand{\cvec}[2]{^\mathrm{#2}\mathbf{#1}}
+\newcommand{\ctrans}[3]{^\mathrm{#3}\mathbf{#1}_\mathrm{#2}}
+\newcommand{\rmat}[9]{\cc{\begin{bmatrix}{#1}&{#2}&{#3}\\\ {#4}&{#5}&{#6}\\\ {#7}&{#8}&{#9}\end{bmatrix}}}
+\newcommand{\hmat}[3]{\cc{\begin{bmatrix}{#1}\\\ {#2}\\\ {#3}\\\ \end{bmatrix}}}
+\newcommand{\mq}[4]{\cc{\begin{bmatrix}{#1}&{#2}&{#3}&{#4}\\\ \end{bmatrix}}}
+\newcommand{\nvec}[3]{\cc{\begin{bmatrix}{#1}&{#2}&{#3}\\\ \end{bmatrix}}}
+\newcommand{\vvec}[3]{\cc{\begin{bmatrix}{#1}\\\ {#2}\\\ {#3}\end{bmatrix}}}
+\newcommand{\vvt}[2]{\cc{\begin{bmatrix}{#1}\\\ {#2}\end{bmatrix}}}
+\newcommand{\calmat}[4]{\cc{\begin{bmatrix}{#1}&0&{#3}\\\ 0&{#2}&{#4}\end{bmatrix}}}
+\newcommand{\dp}{^{\prime\prime}}
+$
 
     
 
@@ -283,17 +297,8 @@ MathJax.Hub.Config({
 <h2 id="rig-and-coordinate-system-conventions">Rig and Coordinate System Conventions</h2>
 
 <p><img src="../pics/rig.jpg" width="500">
-$
-\newcommand{\cc}[1]{\color{black}{#1}}
-\newcommand{\mvec}[1]{\mathbf{#1}}
-\newcommand{\cvec}[2]{^\mathrm{#2}\mathbf{#1}}
-\newcommand{\ctrans}[3]{^\mathrm{#3}\mathbf{#1}_\mathrm{#2}}
-\newcommand{\rmat}[9]{\cc{\begin{bmatrix}{#1}&amp;{#2}&amp;{#3}\\ {#4}&amp;{#5}&amp;{#6}\\ {#7}&amp;{#8}&amp;{#9}\end{bmatrix}}}
-\newcommand{\hmat}[3]{\cc{\begin{bmatrix}{#1}\\ {#2}\\ {#3}\\ \end{bmatrix}}}
-\newcommand{\mq}[4]{\cc{\begin{bmatrix}{#1}&amp;{#2}&amp;{#3}&amp;{#4}\\ \end{bmatrix}}}
-\newcommand{\nvec}[3]{\cc{\begin{bmatrix}{#1}&amp;{#2}&amp;{#3}\\ \end{bmatrix}}}
-$
-<p>All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera). For each sensor we give the transform $\cc{\mvec{T}}$ from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed, i.e. $\cc{\cvec{X}{C1}}$ are the coordinates of vector $\cc{X}$ in the reference frame of camera C1. The transform $\cc{\ctrans{T}{S1}{S2}}$ takes a vector expressed in coordinate system S1 and transforms it to system S2: $\cc{\cvec{X}{S2}=\ctrans{T}{S1}{S2}\ \cvec{X}{S1}}$. For example, given coordinates in the rig reference frame (B), the ones for camera C1 can be obtained via:
+<p>All sensors are extrinsically calibrated with respect to the rig body (B) reference frame (which coincides with the center GoPro C2 camera).
+For each sensor we give the transform $\cc{\mvec{T}}$ from the rig coordinate system to the sensor coordinate system. A left superscript indicates the coordinate system in which vectors are expressed, i.e. $\cc{\cvec{X}{C1}}$ are the coordinates of vector $\cc{X}$ in the reference frame of camera C1. The transform $\cc{\ctrans{T}{S1}{S2}}$ takes a vector expressed in coordinate system S1 and transforms it to system S2: $\cc{\cvec{X}{S2}=\ctrans{T}{S1}{S2}\ \cvec{X}{S1}}$. For example, given coordinates in the rig reference frame (B), the ones for camera C1 can be obtained via:
 $$
 \cc{\cvec{X}{C1}=\ctrans{T}{B}{C1}\ \cvec{X}{B}}
 $$.</p>
@@ -350,6 +355,27 @@ $$</p>
 <tr><td>VI Sensor IMU</td><td>$\cc{\ctrans{T}{B}{VI}}$</td><td>$\mq{    0.9996665399}{    0.0120164831}{   -0.0228493568}{    0.0005656387}$</td><td>$\nvec{   -0.0310}{   -0.1257}{   -0.0171}$</td></tr>
 <tr><td>Tango Bottom Pose</td><td>$\cc{\ctrans{T}{B}{TBP}}$</td><td>$\mq{   -0.1593581712}{    0.9868684006}{    0.0055677908}{   -0.0257824140}$</td><td>$\nvec{   -0.0070}{   -0.0740}{   -0.0588}$</td></tr>
 </table>
+
+<h2 id="extrinsic-calibration-method">Extrinsic calibration method</h2>
+
+<p>The AprilTags on the north wall of the Singh Center were used as a calibration target. A total of 16 synchronized snapshots were cut from the video footage, and optical calibration was performed as described in a forthcoming paper. As an example, here is a picture of snapshot #4. The complete set of images is available for download, as well as the locations of the AprilTags in that area.
+<table>
+<tr>
+<td><figure><img src="../pics/extcalib/ec_vl.jpg" width="500"><figcaption>VI Sensor left</figcaption></figure></td>
+<td><figure><img src="../pics/extcalib/ec_vr.jpg" width="500"><figcaption>VI Sensor right</figcaption></figure></td>
+</tr>
+<tr>
+<td><figure><img src="../pics/extcalib/ec_tb.jpg" width="500"><figcaption>Tango Bottom</figcaption></figure></td>
+<td><figure><img src="../pics/extcalib/ec_tt.jpg" width="500"><figcaption>Tango Top</figcaption></figure></td>
+</tr>
+<tr>
+<td><figure><img src="../pics/extcalib/ec_c1.jpg" width="500"><figcaption>GoPro C1</figcaption></figure></td>
+<td><figure><img src="../pics/extcalib/ec_c2.jpg" width="500"><figcaption>GoPro C2</figcaption></figure></td>
+</tr>
+<tr>
+<td><figure><img src="../pics/extcalib/ec_c3.jpg" width="500"><figcaption>GoPro C3</figcaption></figure></td>
+</tr>
+</table></p>
 
 
 			<footer class="footer">
