@@ -19,6 +19,7 @@ under the `intrinsic_calibration` directory (requires separate download).
 
 ## How to Use the Calibration Models
 
+<a name="howtousecalibmodels"></a>
 The camera calibration models are stored under ``dev/intrinsic_calibration/cc.mat`` and can be loaded
 in Matlab like this:
 ```
@@ -46,6 +47,7 @@ line would read an image, undistort it with the Tango Bottom calibration paramet
 
 ### Undistorting GoPro and Tango Top Images
 
+<a name="undistfisheye"></a>
 Images taken with the fisheye lenses require the use of a custom undistortion matlab function for undistortion.
 Undistortion is a two-step process: first a undistortion map is
 pre-computed (this needs to be done only once per camera), 
@@ -66,7 +68,7 @@ for GoPro camera C1:
 For more undistortion options, see `help ocam_undistort_map`. In
 particular setting `OutputView` to `same` is a useful choice, but you
 can also increase the resolution to reduce quality loss during
-undistort. Note that the intrinsic matrix $\mvec{K}$ depends on the undistortion
+undistort. Note that the intrinsic matrix $\cc{\mvec{K}}$ depends on the undistortion
 mode used, and is in fact a field of the undistortion structure: 
 
 
@@ -148,15 +150,16 @@ far in the corner as possible:
 ![external calibration positions] (../pics/intcalib/c2_ext.jpg)
 
 
-These are the calibration parameters obtained from the toolbox. Refer
-to [2] for description of the parameters and the camera model:
+Below are the calibration parameters obtained from the toolbox. Refer
+to [2] for description of the parameters and the camera model. The easiest way to use these numbers is
+by loading the calibration data into Matlab as described [here](#howtousecalibmodels). Note that there is no intrinsic camera matrix $\cc{\mvec{K}}$ in this table since $\cc{\mvec{K}}$ depends on the way in which the [undistortion](#undistfisheye) is done.
 
 <table>
 <tr><td>Camera</td><td>width</td><td>height</td><td>xc</td><td>yc</td><td>c</td><td>d</td><td>e</td><td>ss [polynomial coefficients]</td></tr>
-<tr><td>GoPro C1</td><td>1920</td><td>1080</td><td>539.9</td><td>959.9</td><td>1.008</td><td>2.710e-04</td><td>-3.229e-04</td><td>$\cc{\begin{bmatrix}-867.43&0.000000&3.1130e-04&5.1424e-08&-3.3722e-11\end{bmatrix}}$</td></tr>
-<tr><td>GoPro C2</td><td>1920</td><td>1080</td><td>539.9</td><td>959.9</td><td>1.004</td><td>-4.473e-04</td><td>-1.378e-03</td><td>$\cc{\begin{bmatrix}-877.47&0.000000&3.3388e-04&-9.2419e-09&1.1041e-11\end{bmatrix}}$</td></tr>
-<tr><td>GoPro C3</td><td>1920</td><td>1080</td><td>539.9</td><td>959.9</td><td>1.006</td><td>1.794e-04</td><td>-8.563e-04</td><td>$\cc{\begin{bmatrix}-875.98&0.000000&3.3576e-04&-3.0754e-08&2.8774e-11\end{bmatrix}}$</td></tr>
-<tr><td>Tango Top Fisheye</td><td>640</td><td>480</td><td>240.0</td><td>320.0</td><td>1.000</td><td>4.162e-04</td><td>1.303e-04</td><td>$\cc{\begin{bmatrix}-273.59&0.000000&1.2923e-03&-8.7901e-07&2.7410e-09\end{bmatrix}}$</td></tr>
+<tr><td>GoPro C1</td><td>1920</td><td>1080</td><td>540</td><td>960</td><td>1.008</td><td>$2.710\times 10^{-4}$</td><td>$2.158\times 10^{-4}$</td><td>$\cc{\begin{bmatrix}-867.43&0&3.113\times 10^{-4}&5.142\times 10^{-8}&2.253\times 10^{-11}\end{bmatrix}}$</td></tr>
+<tr><td>GoPro C2</td><td>1920</td><td>1080</td><td>540</td><td>960</td><td>1.004</td><td>$2.989\times 10^{-4}$</td><td>$0.921\times 10^{-3}$</td><td>$\cc{\begin{bmatrix}-877.47&0&3.339\times 10^{-4}&6.175\times 10^{-9}&1.104\times 10^{-11}\end{bmatrix}}$</td></tr>
+<tr><td>GoPro C3</td><td>1920</td><td>1080</td><td>540</td><td>960</td><td>1.006</td><td>$1.794\times 10^{-4}$</td><td>$5.722\times 10^{-4}$</td><td>$\cc{\begin{bmatrix}-875.98&0&3.358\times 10^{-4}&2.055\times 10^{-8}&2.877\times 10^{-11}\end{bmatrix}}$</td></tr>
+<tr><td>Tango Top Fisheye</td><td>640</td><td>480</td><td>240</td><td>320</td><td>1.000</td><td>$4.162\times 10^{-4}$</td><td>$1.303\times 10^{-4}$</td><td>$\cc{\begin{bmatrix}-273.59&0&1.292\times 10^{-3}&5.874\times 10^{-7}&2.741\times 10^{-9}\end{bmatrix}}$</td></tr>
 </table>
 
 [2]: https://sites.google.com/site/scarabotix/ocamcalib-toolbox/ "Scaramuzza, D: OCamCalib: Omnidirectional Camera Calibration Toolbox for Matlab."
