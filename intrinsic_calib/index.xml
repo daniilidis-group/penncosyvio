@@ -34,7 +34,8 @@ under the &lt;code&gt;intrinsic_calibration&lt;/code&gt; directory (requires sep
 
 &lt;h2 id=&#34;how-to-use-the-calibration-models&#34;&gt;How to Use the Calibration Models&lt;/h2&gt;
 
-&lt;p&gt;The camera calibration models are stored under &lt;code&gt;dev/intrinsic_calibration/cc.mat&lt;/code&gt; and can be loaded
+&lt;p&gt;&lt;a name=&#34;howtousecalibmodels&#34;&gt;&lt;/a&gt;
+The camera calibration models are stored under &lt;code&gt;dev/intrinsic_calibration/cc.mat&lt;/code&gt; and can be loaded
 in Matlab like this:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; cd dev/matlab;
@@ -62,7 +63,8 @@ line would read an image, undistort it with the Tango Bottom calibration paramet
 
 &lt;h3 id=&#34;undistorting-gopro-and-tango-top-images&#34;&gt;Undistorting GoPro and Tango Top Images&lt;/h3&gt;
 
-&lt;p&gt;Images taken with the fisheye lenses require the use of a custom undistortion matlab function for undistortion.
+&lt;p&gt;&lt;a name=&#34;undistfisheye&#34;&gt;&lt;/a&gt;
+Images taken with the fisheye lenses require the use of a custom undistortion matlab function for undistortion.
 Undistortion is a two-step process: first a undistortion map is
 pre-computed (this needs to be done only once per camera),
 which then is used to perform the actual undistortion. For example, this would be the steps to undistort an image
@@ -82,7 +84,7 @@ for GoPro camera C1:&lt;/p&gt;
 &lt;p&gt;For more undistortion options, see &lt;code&gt;help ocam_undistort_map&lt;/code&gt;. In
 particular setting &lt;code&gt;OutputView&lt;/code&gt; to &lt;code&gt;same&lt;/code&gt; is a useful choice, but you
 can also increase the resolution to reduce quality loss during
-undistort. Note that the intrinsic matrix $\mvec{K}$ depends on the undistortion
+undistort. Note that the intrinsic matrix $\cc{\mvec{K}}$ depends on the undistortion
 mode used, and is in fact a field of the undistortion structure:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; u
@@ -158,15 +160,16 @@ were assumed, showing that we took images with the calibration target as
 far in the corner as possible:
 &lt;img src=&#34;../pics/intcalib/c2_ext.jpg&#34; alt=&#34;external calibration positions&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;These are the calibration parameters obtained from the toolbox. Refer
-to &lt;a href=&#34;https://sites.google.com/site/scarabotix/ocamcalib-toolbox/&#34; title=&#34;Scaramuzza, D: OCamCalib: Omnidirectional Camera Calibration Toolbox for Matlab.&#34;&gt;2&lt;/a&gt; for description of the parameters and the camera model:&lt;/p&gt;
+&lt;p&gt;Below are the calibration parameters obtained from the toolbox. Refer
+to &lt;a href=&#34;https://sites.google.com/site/scarabotix/ocamcalib-toolbox/&#34; title=&#34;Scaramuzza, D: OCamCalib: Omnidirectional Camera Calibration Toolbox for Matlab.&#34;&gt;2&lt;/a&gt; for description of the parameters and the camera model. The easiest way to use these numbers is
+by loading the calibration data into Matlab as described &lt;a href=&#34;#howtousecalibmodels&#34;&gt;here&lt;/a&gt;. Note that there is no intrinsic camera matrix $\cc{\mvec{K}}$ in this table since $\cc{\mvec{K}}$ depends on the way in which the &lt;a href=&#34;#undistfisheye&#34;&gt;undistortion&lt;/a&gt; is done.&lt;/p&gt;
 
 &lt;table&gt;
 &lt;tr&gt;&lt;td&gt;Camera&lt;/td&gt;&lt;td&gt;width&lt;/td&gt;&lt;td&gt;height&lt;/td&gt;&lt;td&gt;xc&lt;/td&gt;&lt;td&gt;yc&lt;/td&gt;&lt;td&gt;c&lt;/td&gt;&lt;td&gt;d&lt;/td&gt;&lt;td&gt;e&lt;/td&gt;&lt;td&gt;ss [polynomial coefficients]&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;GoPro C1&lt;/td&gt;&lt;td&gt;1920&lt;/td&gt;&lt;td&gt;1080&lt;/td&gt;&lt;td&gt;539.9&lt;/td&gt;&lt;td&gt;959.9&lt;/td&gt;&lt;td&gt;1.008&lt;/td&gt;&lt;td&gt;2.710e-04&lt;/td&gt;&lt;td&gt;-3.229e-04&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-867.43&amp;0.000000&amp;3.1130e-04&amp;5.1424e-08&amp;-3.3722e-11\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;GoPro C2&lt;/td&gt;&lt;td&gt;1920&lt;/td&gt;&lt;td&gt;1080&lt;/td&gt;&lt;td&gt;539.9&lt;/td&gt;&lt;td&gt;959.9&lt;/td&gt;&lt;td&gt;1.004&lt;/td&gt;&lt;td&gt;-4.473e-04&lt;/td&gt;&lt;td&gt;-1.378e-03&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-877.47&amp;0.000000&amp;3.3388e-04&amp;-9.2419e-09&amp;1.1041e-11\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;GoPro C3&lt;/td&gt;&lt;td&gt;1920&lt;/td&gt;&lt;td&gt;1080&lt;/td&gt;&lt;td&gt;539.9&lt;/td&gt;&lt;td&gt;959.9&lt;/td&gt;&lt;td&gt;1.006&lt;/td&gt;&lt;td&gt;1.794e-04&lt;/td&gt;&lt;td&gt;-8.563e-04&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-875.98&amp;0.000000&amp;3.3576e-04&amp;-3.0754e-08&amp;2.8774e-11\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;Tango Top Fisheye&lt;/td&gt;&lt;td&gt;640&lt;/td&gt;&lt;td&gt;480&lt;/td&gt;&lt;td&gt;240.0&lt;/td&gt;&lt;td&gt;320.0&lt;/td&gt;&lt;td&gt;1.000&lt;/td&gt;&lt;td&gt;4.162e-04&lt;/td&gt;&lt;td&gt;1.303e-04&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-273.59&amp;0.000000&amp;1.2923e-03&amp;-8.7901e-07&amp;2.7410e-09\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoPro C1&lt;/td&gt;&lt;td&gt;1920&lt;/td&gt;&lt;td&gt;1080&lt;/td&gt;&lt;td&gt;540&lt;/td&gt;&lt;td&gt;960&lt;/td&gt;&lt;td&gt;1.008&lt;/td&gt;&lt;td&gt;$2.710\times 10^{-4}$&lt;/td&gt;&lt;td&gt;$2.158\times 10^{-4}$&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-867.43&amp;0&amp;3.113\times 10^{-4}&amp;5.142\times 10^{-8}&amp;2.253\times 10^{-11}\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoPro C2&lt;/td&gt;&lt;td&gt;1920&lt;/td&gt;&lt;td&gt;1080&lt;/td&gt;&lt;td&gt;540&lt;/td&gt;&lt;td&gt;960&lt;/td&gt;&lt;td&gt;1.004&lt;/td&gt;&lt;td&gt;$2.989\times 10^{-4}$&lt;/td&gt;&lt;td&gt;$0.921\times 10^{-3}$&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-877.47&amp;0&amp;3.339\times 10^{-4}&amp;6.175\times 10^{-9}&amp;1.104\times 10^{-11}\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoPro C3&lt;/td&gt;&lt;td&gt;1920&lt;/td&gt;&lt;td&gt;1080&lt;/td&gt;&lt;td&gt;540&lt;/td&gt;&lt;td&gt;960&lt;/td&gt;&lt;td&gt;1.006&lt;/td&gt;&lt;td&gt;$1.794\times 10^{-4}$&lt;/td&gt;&lt;td&gt;$5.722\times 10^{-4}$&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-875.98&amp;0&amp;3.358\times 10^{-4}&amp;2.055\times 10^{-8}&amp;2.877\times 10^{-11}\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Tango Top Fisheye&lt;/td&gt;&lt;td&gt;640&lt;/td&gt;&lt;td&gt;480&lt;/td&gt;&lt;td&gt;240&lt;/td&gt;&lt;td&gt;320&lt;/td&gt;&lt;td&gt;1.000&lt;/td&gt;&lt;td&gt;$4.162\times 10^{-4}$&lt;/td&gt;&lt;td&gt;$1.303\times 10^{-4}$&lt;/td&gt;&lt;td&gt;$\cc{\begin{bmatrix}-273.59&amp;0&amp;1.292\times 10^{-3}&amp;5.874\times 10^{-7}&amp;2.741\times 10^{-9}\end{bmatrix}}$&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 </description>
     </item>
