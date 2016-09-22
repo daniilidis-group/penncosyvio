@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>File_formats on PennCOSYVIO Data Set</title>
+    <link>https://daniilidis-group.github.io/penncosyvio/file_format/</link>
+    <description>Recent content in File_formats on PennCOSYVIO Data Set</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 Mar 2016 00:11:02 +0100</lastBuildDate>
+    <atom:link href="https://daniilidis-group.github.io/penncosyvio/file_format/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>File Format</title>
+      <link>https://daniilidis-group.github.io/penncosyvio/file_format/</link>
+      <pubDate>Wed, 09 Mar 2016 00:11:02 +0100</pubDate>
+      
+      <guid>https://daniilidis-group.github.io/penncosyvio/file_format/</guid>
+      <description>
+
+&lt;h2 id=&#34;video-files&#34;&gt;Video Files&lt;/h2&gt;
+
+&lt;p&gt;Raw video files are provided as &lt;code&gt;mp4&lt;/code&gt; files, with corresponding
+&lt;code&gt;timestamps.txt&lt;/code&gt; files. For the VI sensor, we recommend using the
+original data from the ROS bag or the extracted frames rather than the
+provided &lt;code&gt;mp4&lt;/code&gt; files as the latter suffer from quality loss due to
+compression.&lt;/p&gt;
+
+&lt;p&gt;See the description in the &lt;a href=&#34;../download&#34;&gt;Download&lt;/a&gt; section on how to extract
+individual frames from the mp4 files. Note
+that a bug somewhere between gstreamer and Matlab makes playing back
+frames with Matlab&amp;rsquo;s VideoReader unreliable. It is recommended to play
+back from the extracted frames using the &lt;code&gt;CustomVideoReader&lt;/code&gt; Matlab
+class in the &lt;code&gt;tools/matlab/&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;p&gt;For the orientation of the camera axis, see the &lt;a href=&#34;../extrinsic_calib&#34;&gt;Extrinsic Calibration&lt;/a&gt; section.&lt;/p&gt;
+
+&lt;h2 id=&#34;imu-files&#34;&gt;IMU Files&lt;/h2&gt;
+
+&lt;p&gt;The IMU data is stored in flat text files:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;accelerometer.txt&lt;/code&gt; (Tango): timestamp in seconds, acceleration in x,y,z
+(in m/sec^2)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gyroscope.txt&lt;/code&gt; (Tango): timestamp in seconds, angular velocity around x,
+y, z axes (in rad/sec)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;imu.txt&lt;/code&gt; (VI sensor): timestamp in seconds, acceleration in x,y,z
+(in m/sec^2), angular velocity around x, y, z axes (in rad/sec)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For axis orientation of the IMUs, please refer to the &lt;a href=&#34;../extrinsic_calib&#34;&gt;Extrinsic Calibration&lt;/a&gt; section.&lt;/p&gt;
+
+&lt;h2 id=&#34;pose-ground-truth-files&#34;&gt;Pose (Ground Truth) Files&lt;/h2&gt;
+
+&lt;p&gt;The ground truth and Tango pose files are flat text files that contain the pose as a
+3x4 matrix
+$$
+\cc{\mvec{P}:=\begin{bmatrix}\mvec{R}\ \mvec{t}\end{bmatrix}}
+$$
+corresponding to the body(rig)-to-world transform:
+$$
+\cc{\ctrans{T}{B}{W} = \begin{bmatrix}\mvec{R}\ \mvec{t}\end{bmatrix}}
+$$
+Each line in the pose file starts with a timestamp (in seconds) and is
+followed by the matrix $\cc{\mvec{P}}$ in row major format, i.e:&lt;/p&gt;
+
+&lt;p&gt;timestamp(sec),
+$\cc{\mvec{P}_{11}}$, $\cc{\mvec{P}_{12}}$,$\cc{\mvec{P}_{13}}$, $\cc{\mvec{P}_{14}}$,
+$\cc{\mvec{P}_{21}}$, $\cc{\mvec{P}_{22}}$,$\cc{\mvec{P}_{23}}$, $\cc{\mvec{P}_{24}}$,
+$\cc{\mvec{P}_{31}}$, $\cc{\mvec{P}_{32}}$,$\cc{\mvec{P}_{33}}$, $\cc{\mvec{P}_{34}}$.&lt;/p&gt;
+
+&lt;p&gt;Input files for benchmarking must be produced in this format as well.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

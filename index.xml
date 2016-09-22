@@ -39,9 +39,145 @@ and provides a fairly accurate ground truth (approx 10cm) for the camera rig:
       <guid>https://daniilidis-group.github.io/penncosyvio/download/</guid>
       <description>
 
-&lt;h2 id=&#34;download&#34;&gt;Download&lt;/h2&gt;
+&lt;p&gt;NOTE: Only the Tango Top data is online thus far, we are still looking for large enough disk space to host the entire set. Should happen any day.&lt;/p&gt;
 
-&lt;p&gt;We are still working on this part &amp;hellip;. need to locate a large enough disk for hosting. Should happen any day.&lt;/p&gt;
+&lt;h2 id=&#34;preparing-for-download&#34;&gt;Preparing for Download&lt;/h2&gt;
+
+&lt;p&gt;The installation instructions and scripts have been tested on
+Ubuntu 14.04. Porting the scripts to any unix-like operating system
+should be straight forward. The Windows OS is not supported, but we
+provide raw download links so you can piece the data together
+yourself. See section&lt;/p&gt;
+
+&lt;p&gt;The full data set, without the frames extracted, has a size of about 25GB. If frames are extracted for all cameras and all sequences, the total size balloons to more than 100GB, so having some head room is definitely a good idea. For most purposes, 50GB should be more than enough spacce.&lt;/p&gt;
+
+&lt;h2 id=&#34;running-the-installer&#34;&gt;Running the Installer&lt;/h2&gt;
+
+&lt;p&gt;The install scripts are in the &amp;ldquo;master&amp;rdquo; branch of the
+github repository, and can be run like this (you may need to install
+&lt;code&gt;git&lt;/code&gt; if it&amp;rsquo;s not on your machine yet, using &lt;code&gt;sudo apt-get install git&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/daniilidis-group/penncosyvio.git
+cd penncosyvio/tools
+./download.bash 
+================ PENNCOSYVIO INSTALLER ======================
+------------ select sensor to download:
+1) GoPro C1		  4) Tango Bottom	    7) Intrinsic Calibration
+2) GoPro C2		  5) Tango Top		    8) Extrinsic Calibration
+3) GoPro C3		  6) VI Sensor		    9) Quit
+enter your choice: 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pick the sensors that you are interested in and download the
+data, which will end up in the &lt;code&gt;data&lt;/code&gt; subdirectory. Once you quit out
+of the installer tool, change into the data directory and see what&amp;rsquo;s
+there. This is how it looks if you downloaded only the &lt;code&gt;Tango Top&lt;/code&gt; data:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ..
+tree data
+data
+└── tango_top
+    ├── af
+    │   ├── accelerometer.txt
+    │   ├── gyroscope.txt
+    │   ├── seq_af.mp4
+    │   └── timestamps.txt
+    ├── as
+    │   ├── accelerometer.txt
+    │   ├── gyroscope.txt
+    │   ├── seq_as.mp4
+    │   └── timestamps.txt
+    ├── bf
+    │   ├── accelerometer.txt
+    │   ├── gyroscope.txt
+    │   ├── seq_bf.mp4
+    │   └── timestamps.txt
+    └── bs
+        ├── accelerometer.txt
+        ├── gyroscope.txt
+        ├── seq_bs.mp4
+        └── timestamps.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;running-the-frame-extractor&#34;&gt;Running the Frame Extractor&lt;/h2&gt;
+
+&lt;p&gt;Because reading mp4 files programmatically can be difficult (and notably because Matlab on Ubuntu skips frames due to some issues with the gstreamer framework), we provide a bash script to extract frames in PNG format. The script relies on either ffmpeg or avconv as an extraction tool. Either of them must be installed beforehand, avconf being easier to install as it is part of the Ubuntu distibution. Here is how to use the extraction tool:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd tools
+./extract_frames.bash
+------------ select frames to extract:
+1) GoPro C1	 3) GoPro C3	  5) Tango Top
+2) GoPro C2	 4) Tango Bottom  6) Quit
+enter your choice: 5
+------------- unpacking frames for Tango Top
+ Be patient, this will take about 10-15min/sequence!
+....
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The extracted frames will end up in the respective subdirectory of the &lt;code&gt;data&lt;/code&gt; subdirectory.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>File Format</title>
+      <link>https://daniilidis-group.github.io/penncosyvio/file_format/</link>
+      <pubDate>Wed, 09 Mar 2016 00:11:02 +0100</pubDate>
+      
+      <guid>https://daniilidis-group.github.io/penncosyvio/file_format/</guid>
+      <description>
+
+&lt;h2 id=&#34;video-files&#34;&gt;Video Files&lt;/h2&gt;
+
+&lt;p&gt;Raw video files are provided as &lt;code&gt;mp4&lt;/code&gt; files, with corresponding
+&lt;code&gt;timestamps.txt&lt;/code&gt; files. For the VI sensor, we recommend using the
+original data from the ROS bag or the extracted frames rather than the
+provided &lt;code&gt;mp4&lt;/code&gt; files as the latter suffer from quality loss due to
+compression.&lt;/p&gt;
+
+&lt;p&gt;See the description in the &lt;a href=&#34;../download&#34;&gt;Download&lt;/a&gt; section on how to extract
+individual frames from the mp4 files. Note
+that a bug somewhere between gstreamer and Matlab makes playing back
+frames with Matlab&amp;rsquo;s VideoReader unreliable. It is recommended to play
+back from the extracted frames using the &lt;code&gt;CustomVideoReader&lt;/code&gt; Matlab
+class in the &lt;code&gt;tools/matlab/&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;p&gt;For the orientation of the camera axis, see the &lt;a href=&#34;../extrinsic_calib&#34;&gt;Extrinsic Calibration&lt;/a&gt; section.&lt;/p&gt;
+
+&lt;h2 id=&#34;imu-files&#34;&gt;IMU Files&lt;/h2&gt;
+
+&lt;p&gt;The IMU data is stored in flat text files:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;accelerometer.txt&lt;/code&gt; (Tango): timestamp in seconds, acceleration in x,y,z
+(in m/sec^2)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gyroscope.txt&lt;/code&gt; (Tango): timestamp in seconds, angular velocity around x,
+y, z axes (in rad/sec)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;imu.txt&lt;/code&gt; (VI sensor): timestamp in seconds, acceleration in x,y,z
+(in m/sec^2), angular velocity around x, y, z axes (in rad/sec)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For axis orientation of the IMUs, please refer to the &lt;a href=&#34;../extrinsic_calib&#34;&gt;Extrinsic Calibration&lt;/a&gt; section.&lt;/p&gt;
+
+&lt;h2 id=&#34;pose-ground-truth-files&#34;&gt;Pose (Ground Truth) Files&lt;/h2&gt;
+
+&lt;p&gt;The ground truth and Tango pose files are flat text files that contain the pose as a
+3x4 matrix
+$$
+\cc{\mvec{P}:=\begin{bmatrix}\mvec{R}\ \mvec{t}\end{bmatrix}}
+$$
+corresponding to the body(rig)-to-world transform:
+$$
+\cc{\ctrans{T}{B}{W} = \begin{bmatrix}\mvec{R}\ \mvec{t}\end{bmatrix}}
+$$
+Each line in the pose file starts with a timestamp (in seconds) and is
+followed by the matrix $\cc{\mvec{P}}$ in row major format, i.e:&lt;/p&gt;
+
+&lt;p&gt;timestamp(sec),
+$\cc{\mvec{P}_{11}}$, $\cc{\mvec{P}_{12}}$,$\cc{\mvec{P}_{13}}$, $\cc{\mvec{P}_{14}}$,
+$\cc{\mvec{P}_{21}}$, $\cc{\mvec{P}_{22}}$,$\cc{\mvec{P}_{23}}$, $\cc{\mvec{P}_{24}}$,
+$\cc{\mvec{P}_{31}}$, $\cc{\mvec{P}_{32}}$,$\cc{\mvec{P}_{33}}$, $\cc{\mvec{P}_{34}}$.&lt;/p&gt;
+
+&lt;p&gt;Input files for benchmarking must be produced in this format as well.&lt;/p&gt;
 </description>
     </item>
     

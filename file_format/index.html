@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>PennCOSYVIO Data Set</title>
+    <title>File Format - PennCOSYVIO Data Set</title>
     <meta name="generator" content="Hugo 0.16-DEV" />
 
     
     <meta name="description" content="A data set for Visual Inertial Odometry.">
     
-    <link rel="canonical" href="https://daniilidis-group.github.io/penncosyvio/">
+    <link rel="canonical" href="https://daniilidis-group.github.io/penncosyvio/file_format/">
     
     <meta name="author" content="Bernd Pfrommer">
     
 
-    <meta property="og:url" content="https://daniilidis-group.github.io/penncosyvio/">
+    <meta property="og:url" content="https://daniilidis-group.github.io/penncosyvio/file_format/">
     <meta property="og:title" content="PennCOSYVIO Data Set">
     <meta property="og:image" content="https://daniilidis-group.github.io/penncosyvio/upenn_favicon.jpg">
     <meta name="apple-mobile-web-app-title" content="PennCOSYVIO Data Set">
@@ -105,12 +105,10 @@ $
 $
 
     
-    <link href="https://daniilidis-group.github.io/penncosyvio/index.xml" rel="alternate" type="application/rss+xml" title="PennCOSYVIO Data Set" />
-    <link href="https://daniilidis-group.github.io/penncosyvio/index.xml" rel="feed" type="application/rss+xml" title="PennCOSYVIO Data Set" />
-    
 
   </head>
   <body class="palette-primary-blue palette-accent-light-green">
+
 
 
 
@@ -133,7 +131,7 @@ $
     <div class="headtitle">
     <div class="stretch">
       <div class="title">
-        PennCOSYVIO Data Set
+        File Format
       </div>
     </div>
     </div>
@@ -200,14 +198,11 @@ $
 
 
 
-<a class="current" title="Overview" href="https://daniilidis-group.github.io/penncosyvio/">
+<a  title="Overview" href="https://daniilidis-group.github.io/penncosyvio/">
 	
 	Overview
 </a>
 
-
-<ul id="scrollspy">
-</ul>
 
   
 </li>
@@ -309,46 +304,98 @@ $
 
 	<article class="article">
 		<div class="wrapper">
-			
-				<h1>The PennCOSYVIO Data Set </h1>
-
-				
-
-<h2 id="purpose">Purpose</h2>
-
-<p>The PennCOSY VIO data set is collection of synchronized video and IMU data recorded at the University of Pennsylvania&rsquo;s Singh Center in April 2016. It is geared towards benchmarking of Visual Inertial Odometry algorithms on hand-held devices, but can also be used for other platforms such as micro aerial vehicles or ground robots.</p>
-
-<h2 id="features">Features</h2>
-
-<p>What sets this benchmark apart from previous ones is that it goes from outdoors to indoors:
-<img src="pics/singh_outdoors_gopro.jpg" alt="Singh Center from the outside" />
-<img src="pics/singh_indoors_tango_rgb.jpg" alt="inside the Singh Center" />
-and provides a fairly accurate ground truth (approx 10cm) for the camera rig:
-<img src="pics/sequence_as.jpg" alt="sequence AS trajectory" /></p>
+			<h1>File Format </h1>
 
 			
+
+<h2 id="video-files">Video Files</h2>
+
+<p>Raw video files are provided as <code>mp4</code> files, with corresponding
+<code>timestamps.txt</code> files. For the VI sensor, we recommend using the
+original data from the ROS bag or the extracted frames rather than the
+provided <code>mp4</code> files as the latter suffer from quality loss due to
+compression.</p>
+
+<p>See the description in the <a href="../download">Download</a> section on how to extract
+individual frames from the mp4 files. Note
+that a bug somewhere between gstreamer and Matlab makes playing back
+frames with Matlab&rsquo;s VideoReader unreliable. It is recommended to play
+back from the extracted frames using the <code>CustomVideoReader</code> Matlab
+class in the <code>tools/matlab/</code> directory.</p>
+
+<p>For the orientation of the camera axis, see the <a href="../extrinsic_calib">Extrinsic Calibration</a> section.</p>
+
+<h2 id="imu-files">IMU Files</h2>
+
+<p>The IMU data is stored in flat text files:</p>
+
+<ul>
+<li><code>accelerometer.txt</code> (Tango): timestamp in seconds, acceleration in x,y,z
+(in m/sec^2)</li>
+<li><code>gyroscope.txt</code> (Tango): timestamp in seconds, angular velocity around x,
+y, z axes (in rad/sec)</li>
+<li><code>imu.txt</code> (VI sensor): timestamp in seconds, acceleration in x,y,z
+(in m/sec^2), angular velocity around x, y, z axes (in rad/sec)</li>
+</ul>
+
+<p>For axis orientation of the IMUs, please refer to the <a href="../extrinsic_calib">Extrinsic Calibration</a> section.</p>
+
+<h2 id="pose-ground-truth-files">Pose (Ground Truth) Files</h2>
+
+<p>The ground truth and Tango pose files are flat text files that contain the pose as a
+3x4 matrix
+$$
+\cc{\mvec{P}:=\begin{bmatrix}\mvec{R}\ \mvec{t}\end{bmatrix}}
+$$
+corresponding to the body(rig)-to-world transform:
+$$
+\cc{\ctrans{T}{B}{W} = \begin{bmatrix}\mvec{R}\ \mvec{t}\end{bmatrix}}
+$$
+Each line in the pose file starts with a timestamp (in seconds) and is
+followed by the matrix $\cc{\mvec{P}}$ in row major format, i.e:</p>
+
+<p>timestamp(sec),
+$\cc{\mvec{P}_{11}}$, $\cc{\mvec{P}_{12}}$,$\cc{\mvec{P}_{13}}$, $\cc{\mvec{P}_{14}}$,
+$\cc{\mvec{P}_{21}}$, $\cc{\mvec{P}_{22}}$,$\cc{\mvec{P}_{23}}$, $\cc{\mvec{P}_{24}}$,
+$\cc{\mvec{P}_{31}}$, $\cc{\mvec{P}_{32}}$,$\cc{\mvec{P}_{33}}$, $\cc{\mvec{P}_{34}}$.</p>
+
+<p>Input files for benchmarking must be produced in this format as well.</p>
 
 
 			<footer class="footer">
 				
 
-
-
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
+  
+      <a href="https://daniilidis-group.github.io/penncosyvio/download/" title="Download">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Download
+            </div>
+          </div>
+        </div>
+      </a>
+  
   </div>
 
-  
-  
   <div class="next">
-      <a href="https://daniilidis-group.github.io/penncosyvio/download/" title="Download">
+  
+      <a href="https://daniilidis-group.github.io/penncosyvio/intrinsic_calib/" title="Intrinsic Calibration">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Download
+              Intrinsic Calibration
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">
@@ -356,8 +403,11 @@ and provides a fairly accurate ground truth (approx 10cm) for the camera rig:
           </div>
         </div>
       </a>
+  
   </div>
 </nav>
+
+
 
 
 
