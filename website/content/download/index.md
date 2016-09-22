@@ -8,7 +8,11 @@ NOTE: Only the Tango Top data is online thus far, we are still looking for large
 
 ## Preparing for Download
 
-The installation instructions and scripts have been tested on Ubuntu 14.04. Porting the scripts to any unix-like operating system should be straight forward. The Windows OS is not supported, but we provide raw download links so you can piece the data together yourself.
+The installation instructions and scripts have been tested on
+Ubuntu 14.04. Porting the scripts to any unix-like operating system
+should be straight forward. The Windows OS is not supported, but we
+provide raw download links so you can piece the data together
+yourself. See section 
 
 The full data set, without the frames extracted, has a size of about 25GB. If frames are extracted for all cameras and all sequences, the total size balloons to more than 100GB, so having some head room is definitely a good idea. For most purposes, 50GB should be more than enough spacce.
 
@@ -31,13 +35,34 @@ enter your choice:
 ```
 
 Pick the sensors that you are interested in and download the
-data. Once you quit out of the installer tool, change into the parent
-directory and have a look. This is how it looks if you downloaded only
-the `Tango Top` data:
+data, which will end up in the `data` subdirectory. Once you quit out
+of the installer tool, change into the data directory and see what's
+there. This is how it looks if you downloaded only the `Tango Top` data:
 
 ```
 cd ..
-ls
-README.md  tango_top  tools
+tree data
+data
+└── tango_top
+    ├── af
+    │   ├── accelerometer.txt
+    │   ├── gyroscope.txt
+    │   ├── seq_af.mp4
+    │   └── timestamps.txt
+    ├── as
+    │   ├── accelerometer.txt
+    │   ├── gyroscope.txt
+    │   ├── seq_as.mp4
+    │   └── timestamps.txt
+    ├── bf
+    │   ├── accelerometer.txt
+    │   ├── gyroscope.txt
+    │   ├── seq_bf.mp4
+    │   └── timestamps.txt
+    └── bs
+        ├── accelerometer.txt
+        ├── gyroscope.txt
+        ├── seq_bs.mp4
+        └── timestamps.txt
 ```
 
