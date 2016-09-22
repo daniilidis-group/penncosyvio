@@ -49,6 +49,10 @@ canonifyurls = true
 	url    = "download/"
 	weight = 10
 [[menu.main]]
+	name   = "File Format"
+	url    = "file_format"
+	weight = 15
+[[menu.main]]
 	name   = "Intrinsic Calibration"
 	url    = "intrinsic_calib/"
 	weight = 20

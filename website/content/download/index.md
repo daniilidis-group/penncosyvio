@@ -66,3 +66,22 @@ data
         └── timestamps.txt
 ```
 
+
+
+## Running the Frame Extractor
+
+Because reading mp4 files programmatically can be difficult (and notably because Matlab on Ubuntu skips frames due to some issues with the gstreamer framework), we provide a bash script to extract frames in PNG format. The script relies on either ffmpeg or avconv as an extraction tool. Either of them must be installed beforehand, avconf being easier to install as it is part of the Ubuntu distibution. Here is how to use the extraction tool:
+
+```
+cd tools
+./extract_frames.bash
+------------ select frames to extract:
+1) GoPro C1	 3) GoPro C3	  5) Tango Top
+2) GoPro C2	 4) Tango Bottom  6) Quit
+enter your choice: 5
+------------- unpacking frames for Tango Top
+ Be patient, this will take about 10-15min/sequence!
+....
+```
+
+The extracted frames will end up in the respective subdirectory of the `data` subdirectory.
