@@ -20,7 +20,7 @@ img_typ="png"
 #
 # base directory
 #
-base_dir=..
+base_dir=../data
 
 #
 # the command to use (ffmpeg or avconv)

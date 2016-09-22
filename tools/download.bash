@@ -20,8 +20,9 @@ check_for_command() {
 
 download() {
     echo "------------------------------------------"
-    topdir=..
+    topdir=../data
     outdir=${topdir}/$1
+    mkdir -p $topdir
     tarfname=${1}.tar
     targname=${topdir}/$tarfname
     if [[ "$1" != "tango_top" ]]; then
