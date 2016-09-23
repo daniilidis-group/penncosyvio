@@ -32,6 +32,76 @@ and provides a fairly accurate ground truth (approx 10cm) for the camera rig:
     </item>
     
     <item>
+      <title>Benchmarking</title>
+      <link>https://daniilidis-group.github.io/penncosyvio/benchmarking/</link>
+      <pubDate>Wed, 09 Mar 2016 00:11:02 +0100</pubDate>
+      
+      <guid>https://daniilidis-group.github.io/penncosyvio/benchmarking/</guid>
+      <description>
+
+&lt;h2 id=&#34;compiling-and-using-the-benchmarking-tools&#34;&gt;Compiling and using the benchmarking tools&lt;/h2&gt;
+
+&lt;p&gt;The benchmarking tool uses the c++ and GSL library. On Ubuntu, the GSL library can be installed via &lt;code&gt;sudo apt-get install gsl-bin&lt;/code&gt;, and obviously you need the g++ compiler and &lt;code&gt;make&lt;/code&gt; to be installed. To compile the code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;cd tools/cpp
+make
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This should produce (among others) the &lt;code&gt;test_trajectory&lt;/code&gt; executable,
+which you can use to evaluate the error of a trajectory. As an
+example, here is how to use the program (&lt;code&gt;test_trajectory -h&lt;/code&gt; gives
+options to allow scaling etc).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;./test_trajectory -r ../../data/ground_truth/af/pose.txt -t ../../data/tango_bottom/af/pose.txt
+read 2885 poses from ../../data/ground_truth/af/pose.txt
+read 9596 poses from ../../data/tango_bottom/af/pose.txt
+*not* scaling by scale 1.1144
+alignment transform: 
+[               1  1.24075825e-05 -1.12979008e-05  -0.00269686406
+   -1.2406981e-05     0.999999999  5.32406084e-05  -0.00113532707
+   1.12985614e-05 -5.32404682e-05     0.999999999  0.000683608497]
+
+---------------------------- 
+length of reference trajectory: 148.844m
+length of test trajectory:      169.189m
+---------------------------- 
+--- Average Trajectory Error:
+ rotational error: 1.2967deg
+ error in x:  0.715m
+ error in y:  0.172m
+ error in z:  1.753m
+ 2d error in x/y plane:  0.908m
+ 3d positional error:    2.497m
+--- Relative Position Error:
+ rotational error: 1.5382deg
+ error in x:  2.812%
+ error in y:  1.203%
+ error in z:  8.864%
+ 2d error in x/y plane:  4.746%
+ 3d positional error:   13.114%
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;visualizing-results&#34;&gt;Visualizing results&lt;/h2&gt;
+
+&lt;p&gt;Matlab scripts to visualize trajectories are provided in the matlab
+directory. They take files as input that have pose sequences
+(trajectories) in the standard format used throughout. Here is how to
+visualize the Tango poses vs the ground truth in Matlab:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cd&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;tools&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;matlab&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;p1&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read_trajectory(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;../../data/ground_truth/as/pose.txt&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;p2&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read_trajectory(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;../../data/tango_bottom/as/pose.txt&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;view_trajectories({p1,p2},&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;../misc/tags.txt&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The result should be a picture like this:&lt;br/&gt;
+&lt;img src=&#34;../pics/view_trajectories.jpg&#34;&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Download</title>
       <link>https://daniilidis-group.github.io/penncosyvio/download/</link>
       <pubDate>Wed, 09 Mar 2016 00:11:02 +0100</pubDate>
@@ -57,7 +127,7 @@ yourself. See section&lt;/p&gt;
 github repository, and can be run like this (you may need to install
 &lt;code&gt;git&lt;/code&gt; if it&amp;rsquo;s not on your machine yet, using &lt;code&gt;sudo apt-get install git&lt;/code&gt;):&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/daniilidis-group/penncosyvio.git
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;git clone https://github.com/daniilidis-group/penncosyvio.git
 cd penncosyvio/tools
 ./download.bash 
 ================ PENNCOSYVIO INSTALLER ======================
@@ -73,7 +143,7 @@ data, which will end up in the &lt;code&gt;data&lt;/code&gt; subdirectory. Once 
 of the installer tool, change into the data directory and see what&amp;rsquo;s
 there. This is how it looks if you downloaded only the &lt;code&gt;Tango Top&lt;/code&gt; data:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cd ..
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;cd ..
 tree data
 data
 └── tango_top
@@ -103,7 +173,7 @@ data
 
 &lt;p&gt;Because reading mp4 files programmatically can be difficult (and notably because Matlab on Ubuntu skips frames due to some issues with the gstreamer framework), we provide a bash script to extract frames in PNG format. The script relies on either ffmpeg or avconv as an extraction tool. Either of them must be installed beforehand, avconf being easier to install as it is part of the Ubuntu distibution. Here is how to use the extraction tool:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cd tools
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;cd tools
 ./extract_frames.bash
 ------------ select frames to extract:
 1) GoPro C1	 3) GoPro C3	  5) Tango Top
@@ -210,7 +280,7 @@ under the &lt;code&gt;intrinsic_calibration&lt;/code&gt; directory (requires sep
 The camera calibration models are stored under &lt;code&gt;dev/intrinsic_calibration/cc.mat&lt;/code&gt; and can be loaded
 in Matlab like this:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; cd dev/matlab;
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;gt;&amp;gt; cd dev/matlab;
 &amp;gt;&amp;gt; load ../intrinsic_calibration/cc.mat
 &amp;gt;&amp;gt; cc
 
@@ -230,7 +300,7 @@ cc =
 &lt;p&gt;To undistort images for Tango Bottom&amp;rsquo;s RGB camera or the VI Sensors, you can directly use the Matlab &lt;code&gt;undistortImage&lt;/code&gt; function. The following matlab
 line would read an image, undistort it with the Tango Bottom calibration parameters, and display it:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; imtool(undistortImage(imread(&#39;foo.jpg&#39;),cc{4}));
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;gt;&amp;gt; imtool(undistortImage(imread(&#39;foo.jpg&#39;),cc{4}));
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;undistorting-gopro-and-tango-top-images&#34;&gt;Undistorting GoPro and Tango Top Images&lt;/h3&gt;
@@ -242,7 +312,7 @@ pre-computed (this needs to be done only once per camera),
 which then is used to perform the actual undistortion. For example, this would be the steps to undistort an image
 for GoPro camera C1:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; u = ocam_undistort_map(cc{1}, &#39;OutputView&#39;, &#39;full&#39;);
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;gt;&amp;gt; u = ocam_undistort_map(cc{1}, &#39;OutputView&#39;, &#39;full&#39;);
 &amp;gt;&amp;gt; imtool(ocam_undistort(imread(&#39;../../intrinsic_calibration/c1/frame_0011.png&#39;), u));
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -259,7 +329,7 @@ can also increase the resolution to reduce quality loss during
 undistort. Note that the intrinsic matrix $\cc{\mvec{K}}$ depends on the undistortion
 mode used, and is in fact a field of the undistortion structure:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; u
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;gt;&amp;gt; u
 u = 
     map: [2073600x2 double]
       K: [3x3 double]

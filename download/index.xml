@@ -35,7 +35,7 @@ yourself. See section&lt;/p&gt;
 github repository, and can be run like this (you may need to install
 &lt;code&gt;git&lt;/code&gt; if it&amp;rsquo;s not on your machine yet, using &lt;code&gt;sudo apt-get install git&lt;/code&gt;):&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/daniilidis-group/penncosyvio.git
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;git clone https://github.com/daniilidis-group/penncosyvio.git
 cd penncosyvio/tools
 ./download.bash 
 ================ PENNCOSYVIO INSTALLER ======================
@@ -51,7 +51,7 @@ data, which will end up in the &lt;code&gt;data&lt;/code&gt; subdirectory. Once 
 of the installer tool, change into the data directory and see what&amp;rsquo;s
 there. This is how it looks if you downloaded only the &lt;code&gt;Tango Top&lt;/code&gt; data:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cd ..
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;cd ..
 tree data
 data
 └── tango_top
@@ -81,7 +81,7 @@ data
 
 &lt;p&gt;Because reading mp4 files programmatically can be difficult (and notably because Matlab on Ubuntu skips frames due to some issues with the gstreamer framework), we provide a bash script to extract frames in PNG format. The script relies on either ffmpeg or avconv as an extraction tool. Either of them must be installed beforehand, avconf being easier to install as it is part of the Ubuntu distibution. Here is how to use the extraction tool:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cd tools
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;cd tools
 ./extract_frames.bash
 ------------ select frames to extract:
 1) GoPro C1	 3) GoPro C3	  5) Tango Top

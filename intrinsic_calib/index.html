@@ -279,6 +279,23 @@ $
 </li>
 
 
+
+<li>
+  
+    
+
+
+
+<a  title="Benchmarking" href="https://daniilidis-group.github.io/penncosyvio/benchmarking/">
+	
+	Benchmarking
+</a>
+
+
+  
+</li>
+
+
         </ul>
         
 
@@ -332,7 +349,7 @@ under the <code>intrinsic_calibration</code> directory (requires separate downlo
 The camera calibration models are stored under <code>dev/intrinsic_calibration/cc.mat</code> and can be loaded
 in Matlab like this:</p>
 
-<pre><code>&gt;&gt; cd dev/matlab;
+<pre><code class="language-nohighlight">&gt;&gt; cd dev/matlab;
 &gt;&gt; load ../intrinsic_calibration/cc.mat
 &gt;&gt; cc
 
@@ -352,7 +369,7 @@ cc =
 <p>To undistort images for Tango Bottom&rsquo;s RGB camera or the VI Sensors, you can directly use the Matlab <code>undistortImage</code> function. The following matlab
 line would read an image, undistort it with the Tango Bottom calibration parameters, and display it:</p>
 
-<pre><code>&gt;&gt; imtool(undistortImage(imread('foo.jpg'),cc{4}));
+<pre><code class="language-nohighlight">&gt;&gt; imtool(undistortImage(imread('foo.jpg'),cc{4}));
 </code></pre>
 
 <h3 id="undistorting-gopro-and-tango-top-images">Undistorting GoPro and Tango Top Images</h3>
@@ -364,7 +381,7 @@ pre-computed (this needs to be done only once per camera),
 which then is used to perform the actual undistortion. For example, this would be the steps to undistort an image
 for GoPro camera C1:</p>
 
-<pre><code>&gt;&gt; u = ocam_undistort_map(cc{1}, 'OutputView', 'full');
+<pre><code class="language-nohighlight">&gt;&gt; u = ocam_undistort_map(cc{1}, 'OutputView', 'full');
 &gt;&gt; imtool(ocam_undistort(imread('../../intrinsic_calibration/c1/frame_0011.png'), u));
 </code></pre>
 
@@ -381,7 +398,7 @@ can also increase the resolution to reduce quality loss during
 undistort. Note that the intrinsic matrix $\cc{\mvec{K}}$ depends on the undistortion
 mode used, and is in fact a field of the undistortion structure:</p>
 
-<pre><code>&gt;&gt; u
+<pre><code class="language-nohighlight">&gt;&gt; u
 u = 
     map: [2073600x2 double]
       K: [3x3 double]

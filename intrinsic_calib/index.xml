@@ -38,7 +38,7 @@ under the &lt;code&gt;intrinsic_calibration&lt;/code&gt; directory (requires sep
 The camera calibration models are stored under &lt;code&gt;dev/intrinsic_calibration/cc.mat&lt;/code&gt; and can be loaded
 in Matlab like this:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; cd dev/matlab;
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;gt;&amp;gt; cd dev/matlab;
 &amp;gt;&amp;gt; load ../intrinsic_calibration/cc.mat
 &amp;gt;&amp;gt; cc
 
@@ -58,7 +58,7 @@ cc =
 &lt;p&gt;To undistort images for Tango Bottom&amp;rsquo;s RGB camera or the VI Sensors, you can directly use the Matlab &lt;code&gt;undistortImage&lt;/code&gt; function. The following matlab
 line would read an image, undistort it with the Tango Bottom calibration parameters, and display it:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; imtool(undistortImage(imread(&#39;foo.jpg&#39;),cc{4}));
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;gt;&amp;gt; imtool(undistortImage(imread(&#39;foo.jpg&#39;),cc{4}));
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;undistorting-gopro-and-tango-top-images&#34;&gt;Undistorting GoPro and Tango Top Images&lt;/h3&gt;
@@ -70,7 +70,7 @@ pre-computed (this needs to be done only once per camera),
 which then is used to perform the actual undistortion. For example, this would be the steps to undistort an image
 for GoPro camera C1:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; u = ocam_undistort_map(cc{1}, &#39;OutputView&#39;, &#39;full&#39;);
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;gt;&amp;gt; u = ocam_undistort_map(cc{1}, &#39;OutputView&#39;, &#39;full&#39;);
 &amp;gt;&amp;gt; imtool(ocam_undistort(imread(&#39;../../intrinsic_calibration/c1/frame_0011.png&#39;), u));
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -87,7 +87,7 @@ can also increase the resolution to reduce quality loss during
 undistort. Note that the intrinsic matrix $\cc{\mvec{K}}$ depends on the undistortion
 mode used, and is in fact a field of the undistortion structure:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; u
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;gt;&amp;gt; u
 u = 
     map: [2073600x2 double]
       K: [3x3 double]
