@@ -60,6 +60,10 @@ canonifyurls = true
 	name   = "Extrinsic Calibration"
 	url    = "extrinsic_calib/"
 	weight = 30
+[[menu.main]]
+	name   = "Benchmarking"
+	url    = "benchmarking/"
+	weight = 40
 
 
 [blackfriday]

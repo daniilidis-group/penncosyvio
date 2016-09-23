@@ -22,7 +22,7 @@ The install scripts are in the "master" branch of the
 github repository, and can be run like this (you may need to install
 `git` if it's not on your machine yet, using `sudo apt-get install git`):
 
-```
+```nohighlight
 git clone https://github.com/daniilidis-group/penncosyvio.git
 cd penncosyvio/tools
 ./download.bash 
@@ -39,7 +39,7 @@ data, which will end up in the `data` subdirectory. Once you quit out
 of the installer tool, change into the data directory and see what's
 there. This is how it looks if you downloaded only the `Tango Top` data:
 
-```
+```nohighlight
 cd ..
 tree data
 data
@@ -72,7 +72,7 @@ data
 
 Because reading mp4 files programmatically can be difficult (and notably because Matlab on Ubuntu skips frames due to some issues with the gstreamer framework), we provide a bash script to extract frames in PNG format. The script relies on either ffmpeg or avconv as an extraction tool. Either of them must be installed beforehand, avconf being easier to install as it is part of the Ubuntu distibution. Here is how to use the extraction tool:
 
-```
+```nohighlight
 cd tools
 ./extract_frames.bash
 ------------ select frames to extract:

@@ -22,7 +22,7 @@ under the `intrinsic_calibration` directory (requires separate download).
 <a name="howtousecalibmodels"></a>
 The camera calibration models are stored under ``dev/intrinsic_calibration/cc.mat`` and can be loaded
 in Matlab like this:
-```
+```nohighlight
 >> cd dev/matlab;
 >> load ../intrinsic_calibration/cc.mat
 >> cc
@@ -41,7 +41,7 @@ The `cc` cell array has the cameras in the order:
 
 To undistort images for Tango Bottom's RGB camera or the VI Sensors, you can directly use the Matlab `undistortImage` function. The following matlab
 line would read an image, undistort it with the Tango Bottom calibration parameters, and display it:
-```
+```nohighlight
 >> imtool(undistortImage(imread('foo.jpg'),cc{4}));
 ```
 
@@ -53,7 +53,7 @@ Undistortion is a two-step process: first a undistortion map is
 pre-computed (this needs to be done only once per camera), 
 which then is used to perform the actual undistortion. For example, this would be the steps to undistort an image
 for GoPro camera C1:
-```
+```nohighlight
 >> u = ocam_undistort_map(cc{1}, 'OutputView', 'full');
 >> imtool(ocam_undistort(imread('../../intrinsic_calibration/c1/frame_0011.png'), u));
 ```
@@ -72,7 +72,7 @@ undistort. Note that the intrinsic matrix $\cc{\mvec{K}}$ depends on the undisto
 mode used, and is in fact a field of the undistortion structure: 
 
 
-```
+```nohighlight
 >> u
 u = 
     map: [2073600x2 double]
