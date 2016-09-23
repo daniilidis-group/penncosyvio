@@ -1,14 +1,18 @@
 classdef CustomVideoReader < handle
 %
 % 2016 Bernd Pfrommer
-% GRASP lab
 %
 % This class wraps the matlab video reader, and adds the
-% functionality of reading ordered png frames like a video.
+% functionality of reading ordered png frames like a video. To
+% read frames, simply give the directory name (INCLUDING THE TRAILING
+% '/') instead of a video filename
+%
 %
 % The frames need to all be in one directory, and named frame_0000.png
 % In the same directory must be a file "timestamps.txt" that has the
 % corresponding timestamps of the frames (in seconds).
+%
+% See the reference page for more documentation
 %
     properties
         matlabReader
@@ -21,6 +25,13 @@ classdef CustomVideoReader < handle
     
     methods
         function obj = CustomVideoReader(filenames)
+        %
+        % Constructor: CustomVideoReader(filenames)
+        %% --- input 
+        % filenames   if ends with '/': interpret as directory and look
+        %             for single frames there
+        %             if ends without '/': expect single file and use
+        %             standard matlab video reader
             obj.frameNumber = 0;
             obj.fileNames   = [];
             obj.timeStamps  = [];
@@ -41,6 +52,14 @@ classdef CustomVideoReader < handle
         end
         
         function f = readFrame(obj, varargin)
+        %
+        % f = readFrame(obj, [skip=false])
+        % reads the next frame from the video
+        %% --- input 
+        % skip   optional flag: 1 if this frame will be discarded, i.e.
+        %        if readFrame() is called to wind to a given position.
+        %        This will dramatically speed up the forward winding, but
+        %        return an empty frame.
             obj.frameNumber = obj.frameNumber + 1;
             skip = false;
             if length(varargin) > 0 & varargin{1} == 1
@@ -66,6 +85,8 @@ classdef CustomVideoReader < handle
         end
         
         function read_timestamps(obj, fnames)
+        % f = read_timestamps(obj, fnames)
+        % reads the timestamps for this video from directory 'fnames'
             tsname = [fnames,'timestamps.txt'];
             if exist(tsname, 'file') ~= 2
                 error('cannot find timestamp file: %s', tsname);
@@ -97,6 +118,8 @@ classdef CustomVideoReader < handle
         end
         
         function f = hasFrame(obj)
+        % f = hasFrame()
+        % returns 1 if more frames are waiting, 0 if not
             f = 0;
             if ~isempty(obj.matlabReader)
                 f = hasFrame(obj.matlabReader);
@@ -108,6 +131,8 @@ classdef CustomVideoReader < handle
         end
         
         function n = numberOfFrames(obj)
+        % f = numberOfFrames()
+        % returns number of frames or Inf if cannot be determined
             if ~isempty(obj.matlabReader)
                 n = Inf;
             else
