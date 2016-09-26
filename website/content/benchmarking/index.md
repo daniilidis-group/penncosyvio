@@ -6,7 +6,10 @@ weight: 10
 
 ## Compiling and using the benchmarking tools
 
-The benchmarking tool uses the c++ and GSL library. On Ubuntu, the GSL library can be installed via `sudo apt-get install gsl-bin`, and obviously you need the g++ compiler and `make` to be installed. To compile the code:
+The benchmarking tool uses the c++ and GSL library. On Ubuntu, the GSL
+library can be installed via `sudo apt-get install gsl-bin
+libgs10-dev`, and obviously you need the g++ compiler and `make` to be
+installed. To compile the code:
 
 ```nohighlight
 cd tools/cpp
@@ -15,7 +18,9 @@ make
 This should produce (among others) the `test_trajectory` executable,
 which you can use to evaluate the error of a trajectory. As an
 example, here is how to use the program (`test_trajectory -h` gives
-options to allow scaling etc).
+options to allow scaling etc) to test the output from Tango Bottom's
+proprietary VIO algorithm. You need to download the Tango Bottom data
+for that to work.
 
 ```nohighlight
 ./test_trajectory -r ../../data/ground_truth/af/pose.txt -t ../../data/tango_bottom/af/pose.txt
