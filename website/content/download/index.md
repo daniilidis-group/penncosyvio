@@ -4,8 +4,6 @@ title: Download
 weight: 10
 ---
 
-NOTE: Only the Tango Top data is online thus far, we are still looking for large enough disk space to host the entire set. Should happen any day.
-
 ## Preparing for Download
 
 The installation instructions and scripts have been tested on
