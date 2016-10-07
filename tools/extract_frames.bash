@@ -53,7 +53,7 @@ askifremove () {
 
 check_for_frametool() {
     if check_for_command ffmpeg; then
-	frametool=ffmpeg
+	frametool="ffmpeg -hide_banner"
     else
 	if check_for_command avconv; then
 	    frametool=avconv
@@ -104,9 +104,9 @@ extract_frames() {
 	rm -f $fdir/frame_*.${img_typ}
 	if [[ $1 == *"tango"* ]] ; then
 	    # for tangos, need the -r 30 to get the right number of frames on output
-	    $frametool -v warning -r 30 -i $d/$vid_name -vf "select=gte(n\,0)" $fdir/frame_%04d.${img_typ}
+	    $frametool -r 30 -i $d/$vid_name -vf "select=gte(n\,0)" $fdir/frame_%04d.${img_typ}
 	else
-	    $frametool -v warning -i $d/$vid_name -vf "select=gte(n\,0)" $fdir/frame_%04d.${img_typ}
+	    $frametool -i $d/$vid_name -vf "select=gte(n\,0)" $fdir/frame_%04d.${img_typ}
 	fi
 	return 0;
     else
@@ -134,6 +134,7 @@ unpack_frames() {
 	    check_frame_count "$1" "$seq" "$2"
 	fi
     done
+    echo " frame extraction for ${2} COMPLETED!"
 }
 
 main_menu() {
