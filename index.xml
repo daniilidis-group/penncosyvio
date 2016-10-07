@@ -179,8 +179,6 @@ visualize the Tango poses vs the ground truth in Matlab:&lt;/p&gt;
       <guid>https://daniilidis-group.github.io/penncosyvio/download/</guid>
       <description>
 
-&lt;p&gt;NOTE: Only the Tango Top data is online thus far, we are still looking for large enough disk space to host the entire set. Should happen any day.&lt;/p&gt;
-
 &lt;h2 id=&#34;preparing-for-download&#34;&gt;Preparing for Download&lt;/h2&gt;
 
 &lt;p&gt;The installation instructions and scripts have been tested on
