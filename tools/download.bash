@@ -20,16 +20,12 @@ check_for_command() {
 
 download() {
     echo "------------------------------------------"
+    srcurl=http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/
     topdir=../data
     outdir=${topdir}/$1
     mkdir -p $topdir
     tarfname=${1}.tar
     targname=${topdir}/$tarfname
-    if [[ "$1" != "tango_top" ]]; then
-	echo "ERROR: sorry, only Tango Top dataset is online so far!"
-	return
-    fi
-
     if [[ -d "$outdir" ]]; then
 	echo
 	echo "ERROR: output directory $outdir already exists, remove first!"
@@ -37,7 +33,7 @@ download() {
 	return
     fi
     echo "downloading " $2 " please be patient "
-    wget -O $targname "https://www.dropbox.com/s/1ah9tn3gg5uiphs/tango_top.tar?dl=0"
+    wget -O $targname "$srcurl/$tarfname"
     if [[ $? -eq 0 ]]; then
 	echo "download successful!"
     else
