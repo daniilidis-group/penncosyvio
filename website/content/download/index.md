@@ -9,10 +9,10 @@ weight: 10
 The installation instructions and scripts have been tested on
 Ubuntu 14.04. Porting the scripts to any unix-like operating system
 should be straight forward. The Windows OS is not supported, but we
-provide raw download links so you can piece the data together
-yourself. See section 
+provide raw download links so you can [piece the data together
+yourself](#manual_download).
 
-The full data set, without the frames extracted, has a size of about 25GB. If frames are extracted for all cameras and all sequences, the total size balloons to more than 100GB, so having some head room is definitely a good idea. For most purposes, 50GB should be more than enough spacce.
+The full data set, without the frames extracted, has a size of about 25GB. If frames are extracted for all cameras and all sequences, the total size balloons to more than 100GB, so having some head room is definitely a good idea. For most purposes, 50GB should be more than enough space.
 
 ## Running the Installer
 
@@ -83,3 +83,17 @@ enter your choice: 5
 ```
 
 The extracted frames will end up in the respective subdirectory of the `data` subdirectory.
+
+## Manual Download
+
+<a name="manual_download"></a>
+Here are links for direct download of the data files:
+
+- [GoPro C1 (29.4GB)](http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/c1.tar)
+- [GoPro C2 (29.4GB)](http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/c2.tar)
+- [GoPro C3 (29.5GB)](http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/c3.tar)
+- [Tango Bottom (9.2GB)](http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/tango_bottom.tar)
+- [Tango Top (2.7GB)](http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/tango_top.tar)
+- [VI Sensor (10.5GB)](http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/visensor.tar)
+
+After download, untar them in the `data` directory.
