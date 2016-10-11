@@ -22,10 +22,10 @@
 &lt;p&gt;The installation instructions and scripts have been tested on
 Ubuntu 14.04. Porting the scripts to any unix-like operating system
 should be straight forward. The Windows OS is not supported, but we
-provide raw download links so you can piece the data together
-yourself. See section&lt;/p&gt;
+provide raw download links so you can &lt;a href=&#34;#manual_download&#34;&gt;piece the data together
+yourself&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;The full data set, without the frames extracted, has a size of about 25GB. If frames are extracted for all cameras and all sequences, the total size balloons to more than 100GB, so having some head room is definitely a good idea. For most purposes, 50GB should be more than enough spacce.&lt;/p&gt;
+&lt;p&gt;The full data set, without the frames extracted, has a size of about 25GB. If frames are extracted for all cameras and all sequences, the total size balloons to more than 100GB, so having some head room is definitely a good idea. For most purposes, 50GB should be more than enough space.&lt;/p&gt;
 
 &lt;h2 id=&#34;running-the-installer&#34;&gt;Running the Installer&lt;/h2&gt;
 
@@ -91,6 +91,22 @@ enter your choice: 5
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The extracted frames will end up in the respective subdirectory of the &lt;code&gt;data&lt;/code&gt; subdirectory.&lt;/p&gt;
+
+&lt;h2 id=&#34;manual-download&#34;&gt;Manual Download&lt;/h2&gt;
+
+&lt;p&gt;&lt;a name=&#34;manual_download&#34;&gt;&lt;/a&gt;
+Here are links for direct download of the data files:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/c1.tar&#34;&gt;GoPro C1 (29.4GB)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/c2.tar&#34;&gt;GoPro C2 (29.4GB)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/c3.tar&#34;&gt;GoPro C3 (29.5GB)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/tango_bottom.tar&#34;&gt;Tango Bottom (9.2GB)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/tango_top.tar&#34;&gt;Tango Top (2.7GB)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://visiondata.cis.upenn.edu/penncosyvio/tarfiles/visensor.tar&#34;&gt;VI Sensor (10.5GB)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After download, untar them in the &lt;code&gt;data&lt;/code&gt; directory.&lt;/p&gt;
 </description>
     </item>
     
