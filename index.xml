@@ -361,10 +361,10 @@ under the &lt;code&gt;intrinsic_calibration&lt;/code&gt; directory (requires sep
 &lt;h2 id=&#34;how-to-use-the-calibration-models&#34;&gt;How to Use the Calibration Models&lt;/h2&gt;
 
 &lt;p&gt;&lt;a name=&#34;howtousecalibmodels&#34;&gt;&lt;/a&gt;
-The camera calibration models are stored under &lt;code&gt;dev/intrinsic_calibration/cc.mat&lt;/code&gt; and can be loaded
+The camera calibration models are stored under &lt;code&gt;tools/intrinsic_calibration/cc.mat&lt;/code&gt; and can be loaded
 in Matlab like this:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;gt;&amp;gt; cd dev/matlab;
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;gt;&amp;gt; cd tools/matlab;
 &amp;gt;&amp;gt; load ../intrinsic_calibration/cc.mat
 &amp;gt;&amp;gt; cc
 
