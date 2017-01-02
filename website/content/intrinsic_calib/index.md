@@ -20,10 +20,10 @@ under the `intrinsic_calibration` directory (requires separate download).
 ## How to Use the Calibration Models
 
 <a name="howtousecalibmodels"></a>
-The camera calibration models are stored under ``dev/intrinsic_calibration/cc.mat`` and can be loaded
+The camera calibration models are stored under ``tools/intrinsic_calibration/cc.mat`` and can be loaded
 in Matlab like this:
 ```nohighlight
->> cd dev/matlab;
+>> cd tools/matlab;
 >> load ../intrinsic_calibration/cc.mat
 >> cc
 
