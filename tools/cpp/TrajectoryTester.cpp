@@ -160,7 +160,7 @@ void TrajectoryTester::Err::print(std::ostream &os, double mult,
 }
 
 void TrajectoryTester::Result::print(std::ostream &os) {
-	os << "--- Average Trajectory Error:" << endl;
+	os << "--- Absolute Trajectory Error:" << endl;
 	ate.print(os, 1.0, "m");
 	os << "--- Relative Position Error:" << endl;
 	rpe.print(os, 100.0, "%");

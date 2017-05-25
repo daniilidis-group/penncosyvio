@@ -5,7 +5,16 @@
 CCC       = g++
 CCC_FLAGS = -ansi -pedantic-errors -Wall -Wextra -Wno-unused-parameter -Wno-long-long 
 
-LIBS = -lgsl -lcblas
+#
+# This used to work on ubuntu 14.04
+#
+#LIBS = -lgsl -lcblas
+
+#
+# On 16.04 you need this
+#
+LIBS = -lgsl -lgslcblas
+
 COMMON_OBJ = Pose.o Trajectory.o Quaternion.o
 TEST_OBJ   = test_trajectory.o TrajectoryTester.o
 ALIGN_OBJ  = align_trajectory.o
