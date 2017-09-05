@@ -77,3 +77,24 @@ Here are the sensor characteristics:
 </td>
 </tr>
 </table>
+
+## Citations
+If you are using this dataset, please cite the [following publication](docs/penncosyvio.pdf):
+
+	@inproceedings{DBLP:conf/icra/PfrommerSDC17,
+	author    = {Bernd Pfrommer and
+	Nitin Sanket and
+	Kostas Daniilidis and
+	Jonas Cleveland},
+	title     = {PennCOSYVIO: {A} challenging Visual Inertial Odometry benchmark},
+	booktitle = {2017 {IEEE} International Conference on Robotics and Automation, {ICRA}
+	2017, Singapore, Singapore, May 29 - June 3, 2017},
+	pages     = {3847--3854},
+	year      = {2017},
+	crossref  = {DBLP:conf/icra/2017},
+	url       = {https://doi.org/10.1109/ICRA.2017.7989443},
+	doi       = {10.1109/ICRA.2017.7989443},
+	timestamp = {Wed, 26 Jul 2017 15:17:30 +0200},
+	biburl    = {http://dblp.uni-trier.de/rec/bib/conf/icra/PfrommerSDC17},
+	bibsource = {dblp computer science bibliography, http://dblp.org}
+	}

@@ -68,7 +68,7 @@ $$
 
 ## Extrinsic calibration method
 
-The AprilTags on the north wall of the Singh Center were used as a calibration target. A total of 16 synchronized snapshots were cut from the video footage, and optical calibration was performed as described in a forthcoming paper. As an example, here is a picture of snapshot #4. The complete set of images is available for download, as well as the locations of the AprilTags in that area.
+The AprilTags on the north wall of the Singh Center were used as a calibration target. A total of 16 synchronized snapshots were cut from the video footage, and optical calibration was performed as described in the [ICRA paper](docs/penncosyvio.pdf). As an example, here is a picture of snapshot #4. The complete set of images is available for download, as well as the locations of the AprilTags in that area.
 <table>
 <tr>
 <td><figure><img src="../pics/extcalib/ec_vl.jpg" width="500"><figcaption>VI Sensor left</figcaption></figure></td>
@@ -86,3 +86,12 @@ The AprilTags on the north wall of the Singh Center were used as a calibration t
 <td><figure><img src="../pics/extcalib/ec_c3.jpg" width="500"><figcaption>GoPro C3</figcaption></figure></td>
 </tr>
 </table>
+
+## Notes on the VI sensor calibration
+
+Although the VI-sensor has recorded the rectified images, they are in
+fact *not* rectified due to poor stereo calibration of the sensor. You
+will need to use the extrinsic rectification to get the proper
+camera-camera calibration. Alternatively, you can download a separate
+right/left image extrinsic + intrinsic calibration (done with Kalibr)
+from [here](../docs/visensor_calib.zip).
