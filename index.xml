@@ -93,6 +93,29 @@ Nitin then hauled the rig into and through the Singh center:&lt;br&gt;
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;citations&#34;&gt;Citations&lt;/h2&gt;
+
+&lt;p&gt;If you are using this dataset, please cite the &lt;a href=&#34;docs/penncosyvio.pdf&#34;&gt;following publication&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@inproceedings{DBLP:conf/icra/PfrommerSDC17,
+author    = {Bernd Pfrommer and
+Nitin Sanket and
+Kostas Daniilidis and
+Jonas Cleveland},
+title     = {PennCOSYVIO: {A} challenging Visual Inertial Odometry benchmark},
+booktitle = {2017 {IEEE} International Conference on Robotics and Automation, {ICRA}
+2017, Singapore, Singapore, May 29 - June 3, 2017},
+pages     = {3847--3854},
+year      = {2017},
+crossref  = {DBLP:conf/icra/2017},
+url       = {https://doi.org/10.1109/ICRA.2017.7989443},
+doi       = {10.1109/ICRA.2017.7989443},
+timestamp = {Wed, 26 Jul 2017 15:17:30 +0200},
+biburl    = {http://dblp.uni-trier.de/rec/bib/conf/icra/PfrommerSDC17},
+bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -572,7 +595,7 @@ $$&lt;/p&gt;
 
 &lt;h2 id=&#34;extrinsic-calibration-method&#34;&gt;Extrinsic calibration method&lt;/h2&gt;
 
-&lt;p&gt;The AprilTags on the north wall of the Singh Center were used as a calibration target. A total of 16 synchronized snapshots were cut from the video footage, and optical calibration was performed as described in a forthcoming paper. As an example, here is a picture of snapshot #4. The complete set of images is available for download, as well as the locations of the AprilTags in that area.
+&lt;p&gt;The AprilTags on the north wall of the Singh Center were used as a calibration target. A total of 16 synchronized snapshots were cut from the video footage, and optical calibration was performed as described in the &lt;a href=&#34;docs/penncosyvio.pdf&#34;&gt;ICRA paper&lt;/a&gt;. As an example, here is a picture of snapshot #4. The complete set of images is available for download, as well as the locations of the AprilTags in that area.
 &lt;table&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;figure&gt;&lt;img src=&#34;../pics/extcalib/ec_vl.jpg&#34; width=&#34;500&#34;&gt;&lt;figcaption&gt;VI Sensor left&lt;/figcaption&gt;&lt;/figure&gt;&lt;/td&gt;
@@ -590,6 +613,15 @@ $$&lt;/p&gt;
 &lt;td&gt;&lt;figure&gt;&lt;img src=&#34;../pics/extcalib/ec_c3.jpg&#34; width=&#34;500&#34;&gt;&lt;figcaption&gt;GoPro C3&lt;/figcaption&gt;&lt;/figure&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;notes-on-the-vi-sensor-calibration&#34;&gt;Notes on the VI sensor calibration&lt;/h2&gt;
+
+&lt;p&gt;Although the VI-sensor has recorded the rectified images, they are in
+fact &lt;em&gt;not&lt;/em&gt; rectified due to poor stereo calibration of the sensor. You
+will need to use the extrinsic rectification to get the proper
+camera-camera calibration. Alternatively, you can download a separate
+right/left image extrinsic + intrinsic calibration (done with Kalibr)
+from &lt;a href=&#34;../docs/visensor_calib.zip&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
