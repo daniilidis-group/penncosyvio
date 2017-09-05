@@ -9,6 +9,20 @@ then edit the files in the "content" directory. When done:
 	cd website
 	hugo server -D
 
-Then point your browser to localhost:1313/penncosyvio
+To test, point your browser to localhost:1313/penncosyvio
+
+If you are happy with the results, first commit the source code to
+the "website" branch:
+
+	git commit -a
+	git push
+
+Then commit/push the compiled web pages to the project page:
+
+	cd public
+	git commit -a
+	git push
+
+
 
 
