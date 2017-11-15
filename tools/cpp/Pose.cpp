@@ -180,7 +180,7 @@ bool Pose::readFromStream(ifstream &str) {
 }
 
 bool Pose::writeToStream(ofstream &str) const {
-	str << setw(12) << setprecision(6) << m_time;
+	str << setw(12) << setprecision(6) << fixed << m_time;
 	double *mat = (double *)(m_pose);
 	for (int row = 0; row < 3; row++) {
 		for (int col = 0; col < 3; col++) {
